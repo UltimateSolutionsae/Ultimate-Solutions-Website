@@ -44,8 +44,6 @@ yarn-error.log*
 # scratch scripts used during development
 /_*.js
 
-# staging area for incoming logo artwork (not part of the build)
-/new-logos
 
 # design handoff reference package (kept locally, not part of the build)
 /HandoffUS
