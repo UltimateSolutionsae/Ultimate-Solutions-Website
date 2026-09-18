@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@500;600;800&display=swap");
+@import "../styles/tokens.css";
+@import "../styles/layout.css";
+
+body {
+  background: var(--surface-page);
+}

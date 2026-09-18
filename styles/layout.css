@@ -1,0 +1,94 @@
+/* Responsive layout utility classes used across sections/pages */
+
+.us-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.us-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.us-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.us-grid-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+
+.us-split-16-1 { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); gap: 80px; align-items: start; }
+.us-split-1-1 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 80px; align-items: start; }
+.us-split-13-1 { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 80px; align-items: end; }
+.us-split-1-14 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.4fr); gap: 80px; align-items: start; }
+.us-split-12-1 { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 64px; align-items: center; }
+.us-split-brands { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,2.2fr); gap: 64px; align-items: start; }
+.us-hero-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 64px; align-items: center; }
+
+.us-footer-grid { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr) 1fr 1fr; gap: 64px; }
+
+.us-timeline-row { display: grid; grid-template-columns: 160px 1fr 1.4fr; gap: 40px; }
+
+/* Header: desktop nav vs mobile menu toggle */
+.us-nav-desktop { display: flex; }
+.us-header-cta { display: flex; }
+.us-nav-toggle { display: none; }
+
+@media (max-width: 980px) {
+  .us-nav-desktop, .us-header-cta { display: none; }
+  .us-nav-toggle { display: inline-flex; }
+}
+
+@media (max-width: 980px) {
+  .us-grid-3, .us-grid-4, .us-grid-5 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .us-split-16-1, .us-split-1-1, .us-split-13-1, .us-split-1-14, .us-split-12-1, .us-split-brands, .us-hero-grid {
+    grid-template-columns: minmax(0,1fr);
+    gap: 40px;
+  }
+  .us-footer-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; }
+  .us-timeline-row { grid-template-columns: 96px 1fr; }
+  .us-timeline-row > *:nth-child(3) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .us-grid-2, .us-grid-3, .us-grid-4, .us-grid-5 { grid-template-columns: minmax(0,1fr); }
+  .us-footer-grid { grid-template-columns: minmax(0,1fr); }
+  .us-container, .us-narrow { padding-left: 20px; padding-right: 20px; }
+  .us-timeline-row { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  .us-timeline-row > *:nth-child(3) { grid-column: auto; }
+}
+
+/* Meet the 44px minimum hit area on touch. Keyed on width as well as
+   pointer type, because `pointer: coarse` is unreliable on hybrid devices
+   and in emulation, and a narrow window is the case we actually care about.
+   Icon-only buttons are the worst offenders — the carousel and lightbox
+   chevrons render at 32px. */
+@media (max-width: 980px), (pointer: coarse) {
+  .us-icon-btn { min-width: 44px; min-height: 44px; }
+  [role="tab"] { min-height: 44px; }
+  .us-tap { min-height: 44px; display: inline-flex; align-items: center; }
+  .us-btn { min-height: 44px; }
+}
+
+/* Generously padded panels give back too little content width on a phone —
+   48px of padding on a 390px screen leaves ~250px, which wraps button
+   labels onto two lines. */
+@media (max-width: 640px) {
+  .us-panel { padding: 24px !important; }
+}
+
+/* Horizontally scrolling strips (the Products discipline tabs) get momentum
+   scrolling, snap points and no visible scrollbar so they read as a native
+   swipe rather than a clipped row. */
+.us-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.us-scroll-x::-webkit-scrollbar { display: none; }
+.us-scroll-x > * { scroll-snap-align: start; }
+/* The strip scrolls, so its contents must not wrap — otherwise a sticky
+   bar grows to three rows on a phone and eats a third of the screen. */
+.us-scroll-x [role="tablist"] { flex-wrap: nowrap; }
+.us-scroll-x [role="tab"] { scroll-snap-align: start; white-space: nowrap; }
+
+@media (max-width: 640px) {
+  /* Let the strip bleed to the screen edge so the last chip isn't clipped
+     mid-word, while keeping its contents aligned to the container gutter. */
+  .us-scroll-x {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
