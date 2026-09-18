@@ -3,19 +3,23 @@ import { Button } from "../ui/Button.jsx";
 import { Icon } from "../ui/Icon.jsx";
 import { COPY } from "@/lib/data.js";
 
+// `pad` is the white bezel inside the circular badge. Wide wordmarks sit low
+// in the circle and can run nearly its full width, so they take a small bezel.
+// Square and portrait marks need more, otherwise their corners fall outside
+// the circle and get clipped by the badge's overflow.
 const ORBIT_BADGES_1 = [
-  { left: "96.98%", top: "32.9%", size: 60, pad: 8, src: "/clients/lissoni-partners.svg", alt: "Lissoni & Partners", round: true },
-  { left: "3.02%", top: "67.1%", size: 60, pad: 9, src: "/clients/tak-construction.png", alt: "TAK Construction" },
-  { left: "67.1%", top: "96.98%", size: 60, pad: 10, src: "/clients/tag.jpg", alt: "TAG" },
+  { left: "96.98%", top: "32.9%", size: 60, pad: 6, src: "/clients/lissoni-partners.svg", alt: "Lissoni & Partners" },
+  { left: "3.02%", top: "67.1%", size: 60, pad: 6, src: "/clients/tak-construction.png", alt: "TAK Construction" },
+  { left: "67.1%", top: "96.98%", size: 60, pad: 9, src: "/clients/tag.jpg", alt: "TAG" },
 ];
 const ORBIT_BADGES_3 = [
-  { left: "1.7%", top: "37.1%", size: 56, pad: 9, src: "/clients/al-tayer.png", alt: "Al Tayer" },
-  { left: "98.3%", top: "62.9%", size: 84, pad: 14, src: "/clients/acc.png", alt: "Arabian Construction Co.", shadow: "lg" },
-  { left: "50%", top: "100%", size: 58, pad: 9, src: "/clients/saporiti-italia.svg", alt: "Saporiti Italia" },
-  { left: "62.94%", top: "1.7%", size: 58, pad: 8, src: "/clients/takahisa.png", alt: "TakaHisa", round: true },
+  { left: "1.7%", top: "37.1%", size: 56, pad: 6, src: "/clients/al-tayer.png", alt: "Al Tayer" },
+  { left: "98.3%", top: "62.9%", size: 84, pad: 11, src: "/clients/acc.png", alt: "Arabian Construction Co.", shadow: "lg" },
+  { left: "50%", top: "100%", size: 58, pad: 6, src: "/clients/saporiti-italia.svg", alt: "Saporiti Italia" },
+  { left: "62.94%", top: "1.7%", size: 58, pad: 9, src: "/clients/takahisa.png", alt: "TakaHisa" },
 ];
 
-function OrbitBadge({ left, top, size, pad, src, alt, round, shadow }) {
+function OrbitBadge({ left, top, size, pad, src, alt, shadow }) {
   return (
     <div
       style={{
@@ -24,7 +28,7 @@ function OrbitBadge({ left, top, size, pad, src, alt, round, shadow }) {
         display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: pad,
       }}
     >
-      <img src={src} alt={alt} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", borderRadius: round ? 9999 : 0 }} />
+      <img src={src} alt={alt} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
     </div>
   );
 }
@@ -86,8 +90,8 @@ export function Hero() {
                 <Icon name="lighting" size={20} color="var(--us-deep-teal)" />
               </div>
               <OrbitBadge left="32.9%" top="3%" size={56} pad={9} src="/clients/client-k.jpeg" alt="Client" />
-              <OrbitBadge left="93.3%" top="75%" size={56} pad={8} src="/clients/zen-interiors.svg" alt="Zen Interiors" round />
-              <OrbitBadge left="88.3%" top="17.86%" size={54} pad={9} src="/clients/ashtaar-interiors.png" alt="Ashtaar Interiors" />
+              <OrbitBadge left="93.3%" top="75%" size={56} pad={5} src="/clients/zen-interiors.svg" alt="Zen Interiors" />
+              <OrbitBadge left="88.3%" top="17.86%" size={54} pad={6} src="/clients/ashtaar-interiors.png" alt="Ashtaar Interiors" />
             </div>
             <div className="us-orbit us-orbit-3" style={{ position: "absolute", left: "50%", top: "50%", width: 580, height: 580, transform: "translate(-50%,-50%)", borderRadius: 9999, border: "1.5px dotted rgba(255,255,255,0.18)" }}>
               {ORBIT_BADGES_3.map((b, i) => <OrbitBadge key={i} {...b} />)}
