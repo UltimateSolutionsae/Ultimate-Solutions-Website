@@ -39,11 +39,27 @@ export default function ProjectCaseStudyPage({ params }) {
       <section data-screen-label="Case study hero" style={{ position: "relative", height: 620, overflow: "hidden" }}>
         <img src={project.img} alt={project.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(4,47,52,0.94) 0%, rgba(4,47,52,0.4) 50%, rgba(4,47,52,0.15) 100%)", pointerEvents: "none" }} />
+
+        <div className="us-container" style={{ position: "absolute", top: 0, left: 0, right: 0, paddingTop: "clamp(20px, 4vw, 28px)" }}>
+          <Link
+            href="/projects"
+            className="us-bare us-back-btn us-tap"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              padding: "10px 20px 10px 16px", borderRadius: 9999,
+              background: "var(--scrim-flat)", backdropFilter: "var(--blur-panel)", WebkitBackdropFilter: "var(--blur-panel)",
+              border: "1px solid rgba(255,255,255,0.28)",
+              fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, color: "var(--us-white)",
+              transition: "background 200ms var(--ease-standard), transform 200ms var(--ease-standard)",
+            }}
+          >
+            <Icon name="chevron-left" size={16} color="var(--us-white)" />
+            All Projects
+          </Link>
+        </div>
+
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, pointerEvents: "none" }}>
           <div className="us-container" style={{ paddingBlock: "0 clamp(44px, 7vw, 64px)", color: "var(--us-white)" }}>
-            <Link href="/projects" className="us-bare us-tap" style={{ background: "transparent", border: "none", cursor: "pointer", fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, color: "var(--us-mint)", marginBottom: 16, pointerEvents: "auto" }}>
-              ← All projects
-            </Link>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>
               Case Study · {project.type}
             </div>
@@ -51,6 +67,15 @@ export default function ProjectCaseStudyPage({ params }) {
             <p style={{ margin: "20px 0 0", fontSize: 18, color: "rgba(255,255,255,0.82)", maxWidth: "60ch" }}>{project.summary}</p>
           </div>
         </div>
+
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+        .us-back-btn:hover { background: rgba(4,47,52,0.8); transform: translateY(-2px); }
+        .us-back-btn:active { transform: translateY(0) scale(0.97); }
+      `,
+          }}
+        />
       </section>
 
       <section data-screen-label="Case study facts" style={{ borderBottom: "1px solid var(--border-subtle)" }}>
