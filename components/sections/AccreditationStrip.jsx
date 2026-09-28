@@ -2,6 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { CATS } from "@/lib/data.js";
 
+// Longer descriptive phrasing for this row only — CATS.label stays short
+// everywhere else (Products tabs, footer nav, contact form chips, FAQ heading).
+const STRIP_LABELS = {
+  control: "Control Solutions",
+  lighting: "Lighting & Energy Management",
+  entertainment: "Entertainment",
+  connectivity: "Networking",
+  security: "Security",
+  communications: "Communication",
+};
+
 export function AccreditationStrip() {
   return (
     <section data-screen-label="Accreditation strip" style={{ background: "var(--surface-subtle)", borderBottom: "1px solid var(--border-subtle)" }}>
@@ -12,7 +23,7 @@ export function AccreditationStrip() {
         <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 36, flexWrap: "wrap" }}>
           {CATS.map((c) => (
             <div key={c.id} style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.01em", color: "var(--text-secondary)" }}>
-              {c.label}
+              {STRIP_LABELS[c.id] || c.label}
             </div>
           ))}
         </div>
