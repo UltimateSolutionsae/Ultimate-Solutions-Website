@@ -74,7 +74,7 @@ export function Hero() {
               <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Disciplines, one system</div>
             </div>
             <div>
-              <div style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2 dec.</div>
+              <div style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2 Decades</div>
               <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Of intelligent living</div>
             </div>
           </div>
