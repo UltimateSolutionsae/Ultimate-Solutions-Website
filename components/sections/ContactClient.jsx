@@ -48,7 +48,11 @@ export function ContactClient() {
                 <Icon name={r.icon} size={20} color="var(--us-deep-teal)" />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>{r.k}</div>
-                  <div style={{ fontSize: 16, fontWeight: 600, marginTop: 4 }}>{r.v}</div>
+                  {r.href ? (
+                    <a href={r.href} style={{ display: "inline-block", fontSize: 16, fontWeight: 600, marginTop: 4 }}>{r.v}</a>
+                  ) : (
+                    <div style={{ fontSize: 16, fontWeight: 600, marginTop: 4 }}>{r.v}</div>
+                  )}
                 </div>
               </div>
             ))}
