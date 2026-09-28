@@ -16,7 +16,7 @@ export default function CertificationsPage() {
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 24 }}>Certifications And Partners</div>
           <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "22ch" }}>Accredited And Documented</h1>
           <p style={{ margin: "24px 0 0", fontSize: 18, color: "rgba(255,255,255,0.78)", maxWidth: "56ch" }}>
-            Certification, licensing and manufacturer accreditations. Reference numbers, insurance certificates and method statements are available on request.
+            Certification, licensing and manufacturer accreditations.
           </p>
         </div>
       </section>
