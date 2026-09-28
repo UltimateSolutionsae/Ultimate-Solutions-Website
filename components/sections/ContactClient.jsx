@@ -49,7 +49,13 @@ export function ContactClient() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>{r.k}</div>
                   {r.href ? (
-                    <a href={r.href} style={{ display: "inline-block", fontSize: 16, fontWeight: 600, marginTop: 4 }}>{r.v}</a>
+                    <a
+                      href={r.href}
+                      {...(r.external ? { target: "_blank", rel: "noopener" } : {})}
+                      style={{ display: "inline-block", fontSize: 16, fontWeight: 600, marginTop: 4 }}
+                    >
+                      {r.v}
+                    </a>
                   ) : (
                     <div style={{ fontSize: 16, fontWeight: 600, marginTop: 4 }}>{r.v}</div>
                   )}
