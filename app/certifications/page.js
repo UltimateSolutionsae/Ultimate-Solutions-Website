@@ -33,10 +33,6 @@ export default function CertificationsPage() {
                   <Badge tone="mint">{a.status}</Badge>
                 </div>
                 <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--text-secondary)" }}>{a.body}</p>
-                <div style={{ display: "flex", gap: 24, marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--border-subtle)", fontSize: 13, color: "var(--text-secondary)" }}>
-                  <span>Reference {a.ref}</span>
-                  <span>Renewed {a.renewed}</span>
-                </div>
               </div>
             </div>
           ))}
@@ -90,7 +86,7 @@ export default function CertificationsPage() {
         <div className="us-container">
           <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Manufacturer Accreditations</h2>
           <p style={{ margin: "16px 0 48px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>
-            We hold accreditations across every discipline we deliver. Individual manufacturer logos and usage rights are being confirmed with each supplier before publication.
+            We hold accreditations across every discipline we deliver.
           </p>
           <div className="us-partners-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,minmax(0,1fr))", gap: 1, background: "var(--border-strong)", border: "1px solid var(--border-strong)", borderRadius: 20, overflow: "hidden" }}>
             {PARTNERS.map((p) => (

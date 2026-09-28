@@ -4,7 +4,6 @@ import { Logotype } from "../ui/Logotype.jsx";
 import { CATS } from "@/lib/data.js";
 
 const COMPANY_LINKS = [
-  { label: "Philosophy", href: "/about" },
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
   { label: "Certifications", href: "/certifications" },
@@ -17,7 +16,7 @@ export function Footer() {
       <div style={{ maxWidth: 1240, margin: "0 auto" }}>
         <div className="us-footer-grid">
           <div>
-            <Logotype tone="light" size="md" showEyebrow />
+            <Logotype tone="light" size="md" />
             <p style={{ margin: "28px 0 0", fontSize: 15, color: "rgba(255,255,255,0.62)", maxWidth: "38ch" }}>
               Design, integration, commissioning and aftercare across control, entertainment, security, communications, lighting and connectivity. Founded in Dubai, 2007.
             </p>
