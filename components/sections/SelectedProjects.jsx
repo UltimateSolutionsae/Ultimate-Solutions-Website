@@ -16,7 +16,7 @@ export function SelectedProjects() {
         <Button variant="outline" size="md" icon="arrow-right" href="/projects">All Projects</Button>
       </div>
       <div className="us-grid-3">
-        {PROJECTS.map((p, i) => (
+        {PROJECTS.slice(0, 3).map((p, i) => (
           <Reveal key={p.id} delay={Math.min(i, 7) * 120}>
             <Link href={`/projects/${p.id}`} className="us-bare" style={{ cursor: "pointer", display: "block" }}>
               <div style={{ position: "relative", height: 280, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
