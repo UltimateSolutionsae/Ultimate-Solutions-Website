@@ -9,6 +9,16 @@ import { FaqAccordion } from "../ui/FaqAccordion.jsx";
 import { Reveal } from "../ui/Reveal.jsx";
 import { COPY, CATS, getCategory } from "@/lib/data.js";
 
+// Same photos used for the home page's "Six Disciplines" tiles.
+const CATEGORY_HERO = {
+  control: "/disciplines/control.jpg",
+  entertainment: "/disciplines/entertainment.jpg",
+  security: "/disciplines/security.jpg",
+  communications: "/disciplines/communications.png",
+  lighting: "/lighting-ceiling.jpg",
+  connectivity: "/disciplines/connectivity.png",
+};
+
 export function ProductsClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,7 +32,7 @@ export function ProductsClient() {
   }, [searchParams]);
 
   const cat = getCategory(category);
-  const heroSrc = cat.id === "lighting" ? "/lighting-ceiling.jpg" : null;
+  const heroSrc = CATEGORY_HERO[cat.id] || null;
 
   const onChange = (v) => {
     setCategory(v);
