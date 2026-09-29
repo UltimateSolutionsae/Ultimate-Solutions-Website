@@ -59,7 +59,7 @@ export function Hero() {
           <p style={{ margin: "28px 0 0", fontSize: 18, lineHeight: 1.55, color: "rgba(255,255,255,0.78)", maxWidth: "52ch" }}>
             {COPY.heroLead}
           </p>
-          <div style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="us-hero-btns" style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
             <Button variant="secondary" size="lg" icon="arrow-right" href="/contact" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta}</Button>
             <Button variant="onDark" size="lg" icon="arrow-up-right" href="/projects" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta2}</Button>
           </div>
