@@ -23,6 +23,11 @@ const VARIANTS = {
   onDark: { background: "transparent", color: "var(--us-white)", border: "1px solid var(--border-on-dark)" },
 };
 
+// Only solid-fill variants get a hover shadow — on a bordered/transparent
+// button, --shadow-sm's tight 1-3px blur reads as a hard duplicate outline
+// rather than a soft lift, since there's no opaque fill for it to blend into.
+const FILLED_VARIANTS = new Set(["primary", "secondary", "accent"]);
+
 const HOVER = {
   primary: { background: "var(--us-deep-teal-tint)" },
   secondary: { background: "var(--us-mint-deep)" },
@@ -55,7 +60,7 @@ export function Button({
     cursor: disabled ? "not-allowed" : "pointer",
     transition: "background 200ms var(--ease-standard), border-color 200ms var(--ease-standard), box-shadow 200ms var(--ease-standard)",
     opacity: disabled ? 0.4 : 1,
-    boxShadow: hover && !disabled ? "var(--shadow-sm)" : "none",
+    boxShadow: hover && !disabled && FILLED_VARIANTS.has(variant) ? "var(--shadow-sm)" : "none",
     textDecoration: "none",
     ...v,
     ...(hover && !disabled ? HOVER[variant] : null),
