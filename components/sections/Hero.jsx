@@ -63,18 +63,18 @@ export function Hero() {
             <Button variant="secondary" size="lg" icon="arrow-right" href="/contact" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta}</Button>
             <Button variant="onDark" size="lg" icon="arrow-up-right" href="/projects" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta2}</Button>
           </div>
-          <div style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border-on-dark)", flexWrap: "wrap" }}>
+          <div className="us-hero-stats" style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border-on-dark)", flexWrap: "wrap" }}>
             <div>
-              <div style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2007</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Founded in Dubai</div>
+              <div className="us-hero-stat-num" style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2007</div>
+              <div className="us-hero-stat-lbl" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Founded in Dubai</div>
             </div>
             <div>
-              <div style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>6</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Disciplines, one system</div>
+              <div className="us-hero-stat-num" style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>6</div>
+              <div className="us-hero-stat-lbl" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Disciplines, one system</div>
             </div>
             <div>
-              <div style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2 Decades</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Of intelligent living</div>
+              <div className="us-hero-stat-num" style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2 Decades</div>
+              <div className="us-hero-stat-lbl" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Of intelligent living</div>
             </div>
           </div>
         </div>
