@@ -60,8 +60,8 @@ export function Hero() {
             {COPY.heroLead}
           </p>
           <div style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
-            <Button variant="secondary" size="lg" icon="arrow-right" href="/contact">{COPY.cta}</Button>
-            <Button variant="onDark" size="lg" icon="arrow-up-right" href="/projects">{COPY.cta2}</Button>
+            <Button variant="secondary" size="lg" icon="arrow-right" href="/contact" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta}</Button>
+            <Button variant="onDark" size="lg" icon="arrow-up-right" href="/projects" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta2}</Button>
           </div>
           <div style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border-on-dark)", flexWrap: "wrap" }}>
             <div>
