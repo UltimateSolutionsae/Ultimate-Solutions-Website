@@ -20,6 +20,9 @@ export function ContactClient() {
     setInterests((cur) => (cur.includes(label) ? cur.filter((v) => v !== label) : cur.concat([label])));
   };
 
+  const allSelected = interests.length === CATS.length;
+  const toggleAll = () => setInterests(allSelected ? [] : CATS.map((c) => c.label));
+
   const submit = () => {
     if (!form.email || form.email.indexOf("@") < 0) {
       setTouched(true);
@@ -93,9 +96,26 @@ export function ContactClient() {
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <Input label="Name" placeholder="Full name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
                 <Input label="Email" type="email" placeholder="name@address.com" value={form.email} error={emailBad ? "Enter a valid address." : ""} onChange={(e) => { setForm((f) => ({ ...f, email: e.target.value })); setTouched(true); }} />
-                <Input label={COPY.formField} placeholder={COPY.formPlaceholder} value={form.detail} onChange={(e) => setForm((f) => ({ ...f, detail: e.target.value }))} multiline rows={5} />
+                <Input label={COPY.formField} placeholder={COPY.formPlaceholder} value={form.detail} onChange={(e) => setForm((f) => ({ ...f, detail: e.target.value }))} multiline resizable={false} rows={5} />
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 12 }}>Disciplines of interest</div>
+                  <button
+                    type="button"
+                    onClick={toggleAll}
+                    className="us-tap"
+                    aria-pressed={allSelected}
+                    style={{
+                      cursor: "pointer", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                      fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 700, padding: "12px 16px",
+                      borderRadius: "var(--radius-sm)", marginBottom: 10, transition: "all 200ms var(--ease-standard)",
+                      background: allSelected ? "var(--us-deep-teal)" : "var(--us-mint-wash)",
+                      color: allSelected ? "var(--us-white)" : "var(--us-deep-teal)",
+                      border: `1.5px solid ${allSelected ? "var(--us-deep-teal)" : "var(--us-mint-deep)"}`,
+                    }}
+                  >
+                    <Icon name="check" size={16} />
+                    All Disciplines
+                  </button>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {CATS.map((c) => {
                       const on = interests.includes(c.label);
