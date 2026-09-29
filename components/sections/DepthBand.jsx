@@ -23,17 +23,17 @@ export function DepthBand() {
 
           <h3 style={{ margin: "48px 0 0", fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>Integration, not installation</h3>
           <p style={{ margin: "12px 0 0", fontSize: 16, color: "var(--text-secondary)" }}>
-            Much of the industry still installs technology rather than integrating it: systems chosen for their capabilities, without enough thought for the architecture, the interiors, or the individual needs of the person living there. Equally often, the interaction between the homeowner and the technology is overlooked entirely. Complex systems can be powerful and still be unnecessarily complicated to use. We start from the opposite end.
+            Most of the industry installs technology rather than integrating it — chosen for capability, not for the architecture or the person living there. We start from the opposite end.
           </p>
 
-          <h3 style={{ margin: "40px 0 0", fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>Sophisticated technology, unsophisticated to use</h3>
+          <h3 style={{ margin: "32px 0 0", fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>Sophisticated technology, unsophisticated to use</h3>
           <p style={{ margin: "12px 0 0", fontSize: 16, color: "var(--text-secondary)" }}>
-            Ease of use is fundamental to how we design. The interface should feel natural and effortless, letting you control and enjoy your environment without having to think about the technology behind it. If a room cannot be operated by a guest who has never seen it before, the design is not finished, however capable the equipment.
+            The interface should feel effortless, not something you think about. If a guest can't operate a room unprompted, the design isn't finished.
           </p>
 
-          <h3 style={{ margin: "40px 0 0", fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>Decided while the walls are open</h3>
+          <h3 style={{ margin: "32px 0 0", fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>Decided while the walls are open</h3>
           <p style={{ margin: "12px 0 0", fontSize: 16, color: "var(--text-secondary)" }}>
-            Containment, back-box positions, interface locations, rack space and power are all fixed at first fix. A system designed after the finishes are on can still be made to work, but it becomes a retrofit, with a lower ceiling on what can be added later. We would rather review the drawings early and specify nothing than arrive late and specify a compromise.
+            Containment, back-boxes and rack space are fixed at first fix. We would rather specify nothing early than compromise late.
           </p>
 
           <div style={{ marginTop: 40 }}>
