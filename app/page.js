@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/Hero.jsx";
-import { AccreditationStrip } from "@/components/sections/AccreditationStrip.jsx";
 import { Stats } from "@/components/sections/Stats.jsx";
 import { Categories } from "@/components/sections/Categories.jsx";
 import { Process } from "@/components/sections/Process.jsx";
@@ -13,7 +12,6 @@ export default function HomePage() {
   return (
     <div>
       <Hero />
-      <AccreditationStrip />
       <Stats />
       <Categories />
       <Process />
