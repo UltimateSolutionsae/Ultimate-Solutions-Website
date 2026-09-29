@@ -48,7 +48,7 @@ export function Hero() {
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E\"), linear-gradient(155deg,#0A4249 0%,#042F34 33%,#1E4348 67%,#16232B 100%)",
         }}
       />
-      <div className="us-hero-grid us-container" style={{ position: "relative", paddingBlock: "clamp(64px, 11vw, 120px) clamp(72px, 12vw, 128px)" }}>
+      <div className="us-hero-grid us-container" style={{ position: "relative", paddingBlock: "clamp(48px, 8vw, 88px) clamp(56px, 9vw, 96px)" }}>
         <div style={{ animation: "usFadeUp 720ms var(--ease-standard) both" }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 28 }}>
             {COPY.heroEyebrow}

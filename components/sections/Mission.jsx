@@ -3,7 +3,7 @@ import { Reveal } from "../ui/Reveal.jsx";
 
 export function Mission() {
   return (
-    <section data-screen-label="Mission" style={{ paddingBlock: "0 clamp(72px, 12vw, 128px)" }} className="us-container">
+    <section data-screen-label="Mission" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
       <Reveal className="us-split-1-14" style={{ paddingTop: 24, borderTop: "1px solid var(--border-subtle)" }}>
         <div>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 20 }}>Our Philosophy</div>

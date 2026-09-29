@@ -15,7 +15,7 @@ const SIDEBAR = [
 
 export function DepthBand() {
   return (
-    <section data-screen-label="Depth band" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(72px, 12vw, 128px)" }}>
+    <section data-screen-label="Depth band" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
       <div className="us-container us-split-16-1">
         <Reveal style={{ minWidth: 0 }}>
           <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, maxWidth: "22ch" }}>{COPY.depthTitle}</h2>

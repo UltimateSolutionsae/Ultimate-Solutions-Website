@@ -5,7 +5,7 @@ import { COPY } from "@/lib/data.js";
 
 export function HomeCta() {
   return (
-    <section data-screen-label="Home CTA" style={{ paddingBlock: "clamp(72px, 12vw, 128px)" }} className="us-container">
+    <section data-screen-label="Home CTA" style={{ paddingBlock: "clamp(56px, 9vw, 96px)" }} className="us-container">
       <Reveal className="us-split-12-1" style={{ background: "var(--surface-subtle)", borderRadius: 28, padding: 80 }}>
         <div>
           <h2 style={{ margin: 0, fontSize: "var(--text-h1)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>{COPY.ctaBandTitle}</h2>

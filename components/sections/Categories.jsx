@@ -52,7 +52,7 @@ function Tile({ t }) {
 
 export function Categories() {
   return (
-    <section data-screen-label="Categories" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(72px, 12vw, 128px)" }}>
+    <section data-screen-label="Categories" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
       <div className="us-container">
         <Reveal style={{ maxWidth: 760, marginBottom: 64 }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 20 }}>What We Deliver</div>

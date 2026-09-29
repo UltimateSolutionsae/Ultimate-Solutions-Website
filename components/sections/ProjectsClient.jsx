@@ -12,7 +12,7 @@ export function ProjectsClient() {
 
   return (
     <div>
-      <section data-screen-label="Projects header" style={{ paddingBlock: "clamp(56px, 9vw, 96px) 48px" }} className="us-container">
+      <section data-screen-label="Projects header" style={{ paddingBlock: "clamp(44px, 7vw, 72px) 48px" }} className="us-container">
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 24 }}>Projects</div>
         <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "22ch" }}>Nearly Two Decades Of Integrated Homes</h1>
         <p style={{ margin: "24px 0 0", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>
@@ -43,7 +43,7 @@ export function ProjectsClient() {
         </div>
       </section>
 
-      <section data-screen-label="Projects grid" style={{ paddingBlock: "32px clamp(72px, 12vw, 128px)" }} className="us-container">
+      <section data-screen-label="Projects grid" style={{ paddingBlock: "32px clamp(56px, 9vw, 96px)" }} className="us-container">
         <div className="us-grid-3">
           {visible.map((p, i) => (
             <Reveal key={p.id} delay={Math.min(i, 7) * 120} style={{ height: "100%" }}>

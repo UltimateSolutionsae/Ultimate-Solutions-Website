@@ -13,7 +13,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div>
-      <section data-screen-label="About header" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(44px, 7vw, 64px)" }} className="us-container">
+      <section data-screen-label="About header" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(36px, 5vw, 52px)" }} className="us-container">
         <div className="us-split-13-1">
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 24 }}>About</div>
@@ -25,7 +25,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section data-screen-label="About intro" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
+      <section data-screen-label="About intro" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
         <div style={{ position: "relative", height: 480, borderRadius: 28, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
           <img src="/about/team-on-site.png" alt="The Ultimate Solutions team on site" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
@@ -57,7 +57,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section data-screen-label="Timeline" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(72px, 12vw, 128px)" }}>
+      <section data-screen-label="Timeline" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
         <div className="us-container">
           <h2 style={{ margin: "0 0 24px", fontSize: "var(--text-h1)", fontWeight: 800, letterSpacing: "-0.02em", maxWidth: "20ch" }}>Milestones, 2005 To 2025</h2>
           <p style={{ margin: "0 0 64px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "75ch" }}>
@@ -76,7 +76,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section data-screen-label="Awards" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(72px, 12vw, 128px)" }} className="us-container">
+      <section data-screen-label="Awards" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(56px, 9vw, 96px)" }} className="us-container">
         <h2 style={{ margin: "0 0 48px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Awards And Nominations</h2>
         <div className="us-grid-4">
           {AWARDS.map((a) => (
@@ -92,19 +92,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section data-screen-label="About stats" style={{ paddingBlock: "clamp(72px, 12vw, 128px)" }} className="us-container">
+      <section data-screen-label="About stats" style={{ paddingBlock: "clamp(56px, 9vw, 96px)" }} className="us-container">
         <div className="us-grid-2">
           <StatCard value="2007" label="Founded In Dubai" caption="At a time when smart home technology was still emerging." icon="network" treatment="ruled" size="sm" tone="dark" />
           <StatCard value="2005" label="Where It Started" caption="Summa Cum Laude, San Diego State University." icon="shield-check" treatment="ruled" size="sm" tone="mint" />
         </div>
       </section>
 
-      <section data-screen-label="About FAQ" style={{ paddingBlock: "0 clamp(72px, 12vw, 128px)" }} className="us-narrow">
+      <section data-screen-label="About FAQ" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-narrow">
         <h2 style={{ margin: "0 0 40px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Working With Us</h2>
         <FaqAccordion items={ABOUT_FAQS} />
       </section>
 
-      <section data-screen-label="About press" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px) clamp(72px, 12vw, 128px)" }}>
+      <section data-screen-label="About press" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(44px, 7vw, 72px) clamp(56px, 9vw, 96px)" }}>
         <div className="us-container">
           <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Press And Publications</h2>
           <p style={{ margin: "16px 0 48px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>

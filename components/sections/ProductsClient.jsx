@@ -44,7 +44,7 @@ export function ProductsClient() {
   return (
     <div>
       <section data-screen-label="Products header" style={{ background: "linear-gradient(135deg,#042F34 0%,#16232B 100%)", color: "var(--us-white)", position: "relative", overflow: "hidden" }}>
-        <div className="us-container" style={{ position: "relative", paddingBlock: "clamp(56px, 9vw, 96px) clamp(44px, 7vw, 64px)" }}>
+        <div className="us-container" style={{ position: "relative", paddingBlock: "clamp(44px, 7vw, 72px) clamp(36px, 5vw, 52px)" }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 24 }}>Products</div>
           <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "20ch" }}>{COPY.prodTitle}</h1>
           <p style={{ margin: "24px 0 0", fontSize: 18, color: "rgba(255,255,255,0.78)", maxWidth: "56ch" }}>{COPY.prodLead}</p>
@@ -59,7 +59,7 @@ export function ProductsClient() {
         </div>
       </div>
 
-      <section data-screen-label="Category detail" style={{ paddingBlock: "clamp(52px, 8vw, 80px) 0" }} className="us-container">
+      <section data-screen-label="Category detail" style={{ paddingBlock: "clamp(40px, 6vw, 64px) 0" }} className="us-container">
         <AnimatePresence mode="wait">
         <motion.div
           key={cat.id}
@@ -129,7 +129,7 @@ export function ProductsClient() {
         </AnimatePresence>
       </section>
 
-      <section data-screen-label="Category FAQ" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(72px, 12vw, 128px)" }} className="us-narrow">
+      <section data-screen-label="Category FAQ" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(56px, 9vw, 96px)" }} className="us-narrow">
         <h2 style={{ margin: "0 0 40px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Questions We Are Asked About {cat.label}</h2>
         <FaqAccordion items={cat.faqs} key={cat.id} />
       </section>

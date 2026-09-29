@@ -35,7 +35,7 @@ export function ContactClient() {
   };
 
   return (
-    <section data-screen-label="Contact" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(72px, 12vw, 128px)" }} className="us-container">
+    <section data-screen-label="Contact" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(56px, 9vw, 96px)" }} className="us-container">
       <div className="us-split-1-1">
         <div style={{ minWidth: 0 }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 24 }}>Contact</div>

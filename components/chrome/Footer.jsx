@@ -12,7 +12,7 @@ const COMPANY_LINKS = [
 
 export function Footer() {
   return (
-    <footer style={{ background: "var(--us-charcoal-teal)", color: "var(--us-white)", padding: "clamp(56px, 9vw, 96px) clamp(20px, 4vw, 32px) 40px" }}>
+    <footer style={{ background: "var(--us-charcoal-teal)", color: "var(--us-white)", padding: "clamp(44px, 7vw, 72px) clamp(20px, 4vw, 32px) 40px" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto" }}>
         <div className="us-footer-grid">
           <div>

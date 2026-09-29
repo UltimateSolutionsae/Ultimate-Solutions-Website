@@ -59,7 +59,7 @@ export default function ProjectCaseStudyPage({ params }) {
         </div>
 
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, pointerEvents: "none" }}>
-          <div className="us-container" style={{ paddingBlock: "0 clamp(44px, 7vw, 64px)", color: "var(--us-white)" }}>
+          <div className="us-container" style={{ paddingBlock: "0 clamp(36px, 5vw, 52px)", color: "var(--us-white)" }}>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>
               Case Study · {project.type}
             </div>
@@ -89,7 +89,7 @@ export default function ProjectCaseStudyPage({ params }) {
         </div>
       </section>
 
-      <section data-screen-label="Case study body" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(44px, 7vw, 64px)" }} className="us-container">
+      <section data-screen-label="Case study body" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(36px, 5vw, 52px)" }} className="us-container">
         <div className="us-split-16-1">
           <div style={{ minWidth: 0 }}>
             <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Scope Delivered</h2>
@@ -125,7 +125,7 @@ export default function ProjectCaseStudyPage({ params }) {
         </div>
       </section>
 
-      <section data-screen-label="Case study gallery" style={{ paddingBlock: "0 clamp(72px, 12vw, 128px)" }} className="us-container">
+      <section data-screen-label="Case study gallery" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
         <ProjectGallery items={gallery} />
         {!isKnownDetail && (
           <p style={{ marginTop: 16, fontSize: 13, color: "var(--text-secondary)" }}>

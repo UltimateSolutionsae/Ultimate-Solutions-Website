@@ -80,7 +80,7 @@ export function Testimonial() {
   return (
     <section
       data-screen-label="Testimonial"
-      style={{ background: "var(--surface-subtle)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)", paddingBlock: "clamp(72px, 12vw, 128px)" }}
+      style={{ background: "var(--surface-subtle)", borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}
     >
       <div className="us-container">
         <div

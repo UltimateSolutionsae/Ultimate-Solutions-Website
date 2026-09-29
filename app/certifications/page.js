@@ -12,7 +12,7 @@ export default function CertificationsPage() {
   return (
     <div>
       <section data-screen-label="Certs header" style={{ background: "linear-gradient(135deg,#042F34 0%,#16232B 100%)", color: "var(--us-white)", position: "relative", overflow: "hidden" }}>
-        <div className="us-container" style={{ position: "relative", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
+        <div className="us-container" style={{ position: "relative", paddingBlock: "clamp(44px, 7vw, 72px)" }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 24 }}>Certifications And Partners</div>
           <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "22ch" }}>Accredited And Documented</h1>
           <p style={{ margin: "24px 0 0", fontSize: 18, color: "rgba(255,255,255,0.78)", maxWidth: "56ch" }}>
@@ -21,7 +21,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <section data-screen-label="Accreditations" style={{ paddingBlock: "clamp(56px, 9vw, 96px)" }} className="us-container">
+      <section data-screen-label="Accreditations" style={{ paddingBlock: "clamp(44px, 7vw, 72px)" }} className="us-container">
         <h2 style={{ margin: "0 0 48px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Accreditations</h2>
         <div className="us-grid-2">
           {ACCREDITATIONS.map((a) => (
@@ -40,7 +40,7 @@ export default function CertificationsPage() {
         <style>{`.us-accred-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }`}</style>
       </section>
 
-      <section data-screen-label="Brands" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
+      <section data-screen-label="Brands" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
         <div className="us-split-brands">
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 20 }}>Collaborating For Greater Impact</div>
@@ -63,7 +63,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <section data-screen-label="Clients" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
+      <section data-screen-label="Clients" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
         <div className="us-split-brands">
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 20 }}>Our Esteemed Client Base</div>
@@ -82,7 +82,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <section data-screen-label="Partners" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
+      <section data-screen-label="Partners" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(44px, 7vw, 72px)" }}>
         <div className="us-container">
           <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Manufacturer Accreditations</h2>
           <p style={{ margin: "16px 0 48px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>
@@ -109,7 +109,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <section data-screen-label="Downloads" style={{ paddingBlock: "clamp(56px, 9vw, 96px) clamp(72px, 12vw, 128px)" }} className="us-container">
+      <section data-screen-label="Downloads" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(56px, 9vw, 96px)" }} className="us-container">
         <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Documents And Resources</h2>
         <p style={{ margin: "16px 0 48px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>
           Capability materials, specification support and compliance paperwork for consultants and main contractors. Request what you need and we will send it directly.
