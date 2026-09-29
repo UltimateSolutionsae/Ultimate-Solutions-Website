@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/ui/Icon.jsx";
 import { ProjectGallery } from "@/components/sections/ProjectGallery.jsx";
-import { PROJECTS, getProject, getProjectDetail, getGallery, PROJECT_DETAILS } from "@/lib/data.js";
+import { PROJECTS, getProject, getProjectDetail, getGallery, PROJECT_DETAILS, PROJECT_GALLERIES } from "@/lib/data.js";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -24,6 +24,7 @@ export default function ProjectCaseStudyPage({ params }) {
   const detail = getProjectDetail(project.id);
   const gallery = getGallery(project.id);
   const isKnownDetail = !!PROJECT_DETAILS[project.id];
+  const hasRealGallery = !!PROJECT_GALLERIES[project.id];
 
   const facts = [
     { k: "Location", v: project.year },
@@ -127,7 +128,7 @@ export default function ProjectCaseStudyPage({ params }) {
 
       <section data-screen-label="Case study gallery" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
         <ProjectGallery items={gallery} />
-        {!isKnownDetail && (
+        {!hasRealGallery && (
           <p style={{ marginTop: 16, fontSize: 13, color: "var(--text-secondary)" }}>
             Gallery photography for this project is a placeholder pending final asset sourcing.
           </p>
