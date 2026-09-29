@@ -46,14 +46,14 @@ export function ProjectsClient() {
       <section data-screen-label="Projects grid" style={{ paddingBlock: "32px clamp(72px, 12vw, 128px)" }} className="us-container">
         <div className="us-grid-3">
           {visible.map((p, i) => (
-            <Reveal key={p.id} delay={Math.min(i, 7) * 120}>
+            <Reveal key={p.id} delay={Math.min(i, 7) * 120} style={{ height: "100%" }}>
               <Link
                 href={`/projects/${p.id}`}
                 className="us-bare us-project-card"
                 style={{
                   cursor: "pointer", display: "flex", flexDirection: "column", background: "var(--surface-card)",
                   border: "1px solid var(--border-subtle)", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-sm)",
-                  transition: "transform 200ms var(--ease-standard)",
+                  transition: "transform 200ms var(--ease-standard)", height: "100%",
                 }}
               >
                 <div style={{ position: "relative", height: 240 }}>
