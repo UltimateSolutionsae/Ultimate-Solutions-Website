@@ -57,7 +57,7 @@ export function Header() {
       <div style={{ maxWidth: 1240, margin: "0 auto", padding: "14px 32px", minHeight: 76, display: "flex", alignItems: "center", gap: 20 }}>
         <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", alignItems: "center" }}>
           <Link href="/" aria-label="Ultimate Solutions — Home" style={{ display: "inline-flex", border: "none" }}>
-            <Logotype tone="light" size="sm" />
+            <Logotype tone="light" size="sm" width={140} />
           </Link>
         </div>
 
