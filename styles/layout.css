@@ -17,6 +17,9 @@
 
 .us-timeline-row { display: grid; grid-template-columns: 160px 1fr 1.4fr; gap: 40px; }
 
+.us-accred-row { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+.us-accred-grid { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 36px; row-gap: 14px; flex: 1; }
+
 /* Header: desktop nav vs mobile menu toggle */
 .us-nav-desktop { display: flex; }
 .us-header-cta { display: flex; }
@@ -36,6 +39,7 @@
   .us-footer-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; }
   .us-timeline-row { grid-template-columns: 96px 1fr; }
   .us-timeline-row > *:nth-child(3) { grid-column: 1 / -1; }
+  .us-accred-grid { grid-template-columns: repeat(2, max-content); }
 }
 
 @media (max-width: 640px) {
@@ -44,6 +48,9 @@
   .us-container, .us-narrow { padding-left: 20px; padding-right: 20px; }
   .us-timeline-row { grid-template-columns: minmax(0,1fr); gap: 8px; }
   .us-timeline-row > *:nth-child(3) { grid-column: auto; }
+  .us-accred-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .us-accred-grid { grid-template-columns: minmax(0,1fr); width: 100%; }
+  .us-accred-grid > div { white-space: normal !important; }
 }
 
 /* Meet the 44px minimum hit area on touch. Keyed on width as well as
