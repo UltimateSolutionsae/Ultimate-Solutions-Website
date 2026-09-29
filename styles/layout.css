@@ -40,7 +40,24 @@
 
 @media (max-width: 640px) {
   .us-grid-2, .us-grid-3, .us-grid-4, .us-grid-5 { grid-template-columns: minmax(0,1fr); }
-  .us-footer-grid { grid-template-columns: minmax(0,1fr); }
+  /* Footer: was one long stacked column (logo, 6 disciplines, 4 company
+     links, contact), which ran past 4000px of pure link list on a phone.
+     Put Disciplines and Company side by side instead of one under the
+     other; logo/tagline and Contact stay full width above/below them. */
+  .us-footer-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    column-gap: 24px;
+    row-gap: 32px;
+  }
+  .us-footer-grid > *:nth-child(1),
+  .us-footer-grid > *:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+  .us-footer-heading { margin-bottom: 12px !important; }
+  .us-footer-links { gap: 6px !important; }
+  .us-footer-links a { padding-block: 4px !important; }
+  .us-footer-bottom { margin-top: 40px !important; padding-top: 24px !important; }
+
   .us-container, .us-narrow { padding-left: 20px; padding-right: 20px; }
   .us-timeline-row { grid-template-columns: minmax(0,1fr); gap: 8px; }
   .us-timeline-row > *:nth-child(3) { grid-column: auto; }
