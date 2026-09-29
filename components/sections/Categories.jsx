@@ -6,7 +6,7 @@ import { Reveal } from "../ui/Reveal.jsx";
 import { COPY } from "@/lib/data.js";
 
 const TILES = [
-  { id: "control", num: "01", label: "Control", title: "Every System, One Command", desc: "Mobile, remote, voice and gesture control resolved into a single interface across the home.", img: null, placeholder: "Hand adjusting a wall-mounted control panel" },
+  { id: "control", num: "01", label: "Control", title: "Every System, One Command", desc: "Mobile, remote, voice and gesture control resolved into a single interface across the home.", img: "/disciplines/control.jpg", placeholder: "Hand adjusting a wall-mounted control panel" },
   { id: "entertainment", num: "02", label: "Entertainment", title: "Sound And Picture, Built In", desc: "Speaker and screen positions taken from the seating plan, agreed with the interior designer.", img: "/disciplines/entertainment.jpg", placeholder: "Media room in low light" },
   { id: "security", num: "03", label: "Security", title: "Access, Surveillance And Calm", desc: "Specialist systems kept intact, integrated at the point where the home responds.", img: "/disciplines/security.jpg", placeholder: "Entrance at dusk, access panel beside the door" },
   { id: "communications", num: "04", label: "Communications", title: "One Line To Every Room", desc: "Intercom, paging and telephony on the same backbone, so a call reaches the room a person is actually in.", img: "/disciplines/communications.png", placeholder: "Intercom panel at an entrance" },
