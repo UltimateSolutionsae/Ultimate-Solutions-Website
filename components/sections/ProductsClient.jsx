@@ -54,7 +54,7 @@ export function ProductsClient() {
       <div style={{ position: "sticky", top: 76, zIndex: 40, background: "var(--surface-page)", borderBottom: "1px solid var(--border-subtle)" }}>
         <div className="us-container">
           <div className="us-scroll-x" style={{ paddingBlock: "20px" }}>
-            <Tabs items={CATS.map((c) => ({ value: c.id, label: c.label }))} value={category} variant="pill" onChange={onChange} />
+            <Tabs items={CATS.map((c) => ({ value: c.id, label: c.label }))} value={category} variant="pill" onChange={onChange} style={{ flexWrap: "nowrap" }} />
           </div>
         </div>
       </div>
