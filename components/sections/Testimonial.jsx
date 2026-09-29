@@ -10,6 +10,8 @@ function initials(name) {
   return name.replace(/\./g, "").toUpperCase();
 }
 
+const QUOTE_TEXT_STYLE = { margin: 0, fontSize: "clamp(21px, 3.4vw, 26px)", fontWeight: 500, letterSpacing: "-0.01em", lineHeight: 1.4, color: "var(--text-primary)" };
+
 function SplitText({ text }) {
   const words = text.split(" ");
   return (
@@ -137,18 +139,31 @@ export function Testimonial() {
             ))}
           </div>
 
-          {/* Quote */}
-          <AnimatePresence mode="wait">
-            <motion.blockquote
-              key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.2 } }}
-              style={{ margin: 0, fontSize: "clamp(21px, 3.4vw, 26px)", fontWeight: 500, letterSpacing: "-0.01em", lineHeight: 1.4, color: "var(--text-primary)" }}
-            >
-              <SplitText text={cur.text} />
-            </motion.blockquote>
-          </AnimatePresence>
+          {/* Quote. Testimonials vary a lot in length, so the visible,
+              animated blockquote sits absolutely positioned over an
+              invisible stack of every quote (same grid cell) that reserves
+              the tallest one's height -- otherwise the section reflows and
+              everything below jumps every time you switch testimonials. */}
+          <div style={{ position: "relative" }}>
+            <div aria-hidden="true" style={{ display: "grid", visibility: "hidden" }}>
+              {QUOTES.map((q, i) => (
+                <blockquote key={i} style={{ ...QUOTE_TEXT_STYLE, gridArea: "1 / 1" }}>
+                  {q.text}
+                </blockquote>
+              ))}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.blockquote
+                key={active}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                style={{ ...QUOTE_TEXT_STYLE, position: "absolute", inset: 0 }}
+              >
+                <SplitText text={cur.text} />
+              </motion.blockquote>
+            </AnimatePresence>
+          </div>
 
           {/* Author */}
           <div style={{ marginTop: 48, display: "flex", alignItems: "center", gap: 16 }}>
