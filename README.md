@@ -136,9 +136,12 @@ Logos display in ~170px tiles, so aim for ~800px wide (3x retina) or SVG.
 `/certifications`: Ubiquiti, Tridium Niagara, Architettura Sonora, and three
 Crestron accreditations (DMC-E, DMC-D, Certified Programmer).
 
-**The contact form has no backend.** It validates client-side and shows a success
-state, but submits nowhere. Wire up `submit` in
-`components/sections/ContactClient.jsx` before launch.
+**The contact form has no real backend.** `submit` in
+`components/sections/ContactClient.jsx` builds a `mailto:` link (to the address
+in `CONTACT_ROWS`) and opens it, so the visitor's own email client sends the
+enquiry — there's no server-side send and no record of submissions. Good
+enough for now; replace with a proper transactional email service (e.g.
+Resend) before launch, which needs an API key and an API route.
 
 **`images.unoptimized: true`** in `next.config.mjs` — set so builds don't need the
 `sharp` binary. Turn Next's image optimisation on for production if the hosting

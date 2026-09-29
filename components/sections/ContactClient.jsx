@@ -25,6 +25,18 @@ export function ContactClient() {
       setTouched(true);
       return;
     }
+    const emailRow = CONTACT_ROWS.find((r) => r.k === "Email");
+    const to = emailRow ? emailRow.v : "info@ultimatesolutions.net";
+    const subject = `Consultation enquiry from ${form.name || "website visitor"}`;
+    const body = [
+      `Name: ${form.name || "-"}`,
+      `Email: ${form.email}`,
+      `Disciplines of interest: ${interests.length ? interests.join(", ") : "-"}`,
+      "",
+      "About the project:",
+      form.detail || "-",
+    ].join("\n");
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
 
@@ -71,8 +83,8 @@ export function ContactClient() {
               <div style={{ display: "inline-flex", width: 56, height: 56, alignItems: "center", justifyContent: "center", borderRadius: 9999, background: "var(--us-mint)", marginBottom: 24 }}>
                 <Icon name="check" size={24} color="var(--us-deep-teal)" />
               </div>
-              <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Enquiry Sent</h2>
-              <p style={{ margin: "16px 0 32px", fontSize: 16, color: "var(--text-secondary)" }}>We reply within one working day.</p>
+              <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Your Email App Should Now Be Open</h2>
+              <p style={{ margin: "16px 0 32px", fontSize: 16, color: "var(--text-secondary)" }}>We've pre-filled a message to our team — send it from there and we'll reply within one working day.</p>
               <Button variant="outline" size="md" onClick={resetForm}>Send Another</Button>
             </div>
           ) : (
