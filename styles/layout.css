@@ -72,6 +72,14 @@
   .us-panel { padding: 24px !important; }
 }
 
+/* The testimonial card hides the native cursor in favour of a custom
+   magnetic one, which only makes sense with a real pointer. Touch devices
+   get the native pointer back and the custom cursor never renders. */
+@media (hover: none) and (pointer: coarse) {
+  [data-screen-label="Testimonial"] [role="button"] { cursor: pointer !important; }
+  .us-testimonial-cursor { display: none; }
+}
+
 /* Horizontally scrolling strips (the Products discipline tabs) get momentum
    scrolling, snap points and no visible scrollbar so they read as a native
    swipe rather than a clipped row. */
