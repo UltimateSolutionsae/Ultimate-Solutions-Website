@@ -63,12 +63,6 @@ export function ContactClient() {
               </div>
             ))}
           </div>
-
-          <div style={{ marginTop: 48, position: "relative", height: 280, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)", background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center", padding: "0 24px" }}>
-              Dubai skyline at dusk, or the studio — placeholder pending final photography
-            </span>
-          </div>
         </div>
 
         <div className="us-panel" style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 28, padding: 48, boxShadow: "var(--shadow-md)" }}>
@@ -117,6 +111,12 @@ export function ContactClient() {
             </div>
           )}
         </div>
+      </div>
+
+      <div style={{ marginTop: 64, position: "relative", height: 320, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)", background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center", padding: "0 24px" }}>
+          Dubai skyline at dusk, or the studio — placeholder pending final photography
+        </span>
       </div>
     </section>
   );
