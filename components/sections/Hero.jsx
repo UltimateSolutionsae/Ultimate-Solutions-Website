@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "../ui/Button.jsx";
-import { Icon } from "../ui/Icon.jsx";
 import { COPY } from "@/lib/data.js";
 
 // `pad` is the white bezel inside the circular badge. Wide wordmarks sit low
@@ -86,9 +85,6 @@ export function Hero() {
               {ORBIT_BADGES_1.map((b, i) => <OrbitBadge key={i} {...b} />)}
             </div>
             <div className="us-orbit us-orbit-2" style={{ position: "absolute", left: "50%", top: "50%", width: 420, height: 420, transform: "translate(-50%,-50%)", borderRadius: 9999, border: "1.5px dotted rgba(255,255,255,0.22)" }}>
-              <div style={{ position: "absolute", left: "6.7%", top: "75%", transform: "translate(-50%,-50%)", width: 52, height: 52, borderRadius: 9999, background: "var(--us-white)", boxShadow: "var(--shadow-md)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Icon name="lighting" size={20} color="var(--us-deep-teal)" />
-              </div>
               <OrbitBadge left="32.9%" top="3%" size={56} pad={9} src="/clients/client-k.jpeg" alt="Client" />
               <OrbitBadge left="93.3%" top="75%" size={56} pad={5} src="/clients/zen-interiors.svg" alt="Zen Interiors" />
               <OrbitBadge left="88.3%" top="17.86%" size={54} pad={6} src="/clients/ashtaar-interiors.png" alt="Ashtaar Interiors" />
