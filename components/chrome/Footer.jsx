@@ -48,7 +48,7 @@ export function Footer() {
             <div className="us-footer-heading" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>Contact</div>
             <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15, color: "rgba(255,255,255,0.72)" }}>
               <span>Enquiries by email</span>
-              <span>Dubai, United Arab Emirates</span>
+              <span>Churchill Towers, Business Bay, Office 116, Dubai</span>
               <span>Homeowner and trade enquiries<br />answered within one working day</span>
             </div>
           </div>

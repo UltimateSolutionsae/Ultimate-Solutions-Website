@@ -40,7 +40,7 @@ export default function PrivacyPage() {
         <div className="us-panel" style={{ background: "var(--surface-subtle)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 40, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
           <div>
             <div style={{ fontSize: 16, fontWeight: 600 }}>Ultimate Solutions Networking Installation LLC</div>
-            <div style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 4 }}>Dubai, United Arab Emirates</div>
+            <div style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 4 }}>Churchill Towers, Business Bay, Office 116, Dubai</div>
           </div>
           <Button variant="primary" size="md" icon="mail" href="/contact">Contact Us</Button>
         </div>
