@@ -113,10 +113,8 @@ export function ContactClient() {
         </div>
       </div>
 
-      <div style={{ marginTop: 64, position: "relative", height: 320, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)", background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center", padding: "0 24px" }}>
-          Dubai skyline at dusk, or the studio — placeholder pending final photography
-        </span>
+      <div style={{ marginTop: 64, position: "relative", height: 320, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
+        <img src="/contact/dubai-skyline.jpg" alt="Dubai skyline at dusk" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
       </div>
     </section>
   );

@@ -115,7 +115,6 @@ Verified clean at 390px: no horizontal scroll, 44px minimum tap targets.
 **Placeholder imagery** — flagged in the handoff, never resolved. These render as
 neutral blocks with descriptive text rather than fake photography:
 
-- Contact page skyline/studio image
 - Villa At The Palm case study gallery (5 slots; its hero and card images are real)
 
 **Client logos still low-resolution** in `public/clients/`:
