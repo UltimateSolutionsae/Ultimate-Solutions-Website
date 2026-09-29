@@ -9,18 +9,23 @@ const SIZES = {
   lg: { fontSize: "var(--text-body-lg)", padding: "16px 32px", gap: 10, icon: 18 },
 };
 
+// borderWidth/borderStyle/borderColor as separate longhands, not the
+// `border` shorthand — HOVER below only ever overrides borderColor, and
+// mixing the shorthand with that longhand across renders is a known React
+// inline-style bug: toggling hover on/off left stale per-side border colors
+// instead of resetting cleanly.
 const VARIANTS = {
-  primary: { background: "var(--us-deep-teal)", color: "var(--us-white)", border: "1px solid var(--us-deep-teal)" },
-  secondary: { background: "var(--us-mint)", color: "var(--us-deep-teal)", border: "1px solid var(--us-mint)" },
-  accent: { background: "var(--accent)", color: "var(--us-charcoal-teal)", border: "1px solid var(--accent)" },
-  outline: { background: "transparent", color: "var(--us-deep-teal)", border: "1px solid var(--border-strong)" },
+  primary: { background: "var(--us-deep-teal)", color: "var(--us-white)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--us-deep-teal)" },
+  secondary: { background: "var(--us-mint)", color: "var(--us-deep-teal)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--us-mint)" },
+  accent: { background: "var(--accent)", color: "var(--us-charcoal-teal)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--accent)" },
+  outline: { background: "transparent", color: "var(--us-deep-teal)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--border-strong)" },
   // Same as "outline" but for use on a --surface-subtle panel, where
   // --border-strong (#C9DCE0) sits almost on top of the panel's own
   // #E4EEF0 background and the border nearly disappears. Uses the
   // design system's existing "slate" derived token for real contrast.
-  outlineOnSurface: { background: "transparent", color: "var(--us-deep-teal)", border: "1px solid var(--us-slate)" },
-  ghost: { background: "transparent", color: "var(--us-deep-teal)", border: "1px solid transparent" },
-  onDark: { background: "transparent", color: "var(--us-white)", border: "1px solid var(--border-on-dark)" },
+  outlineOnSurface: { background: "transparent", color: "var(--us-deep-teal)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--us-slate)" },
+  ghost: { background: "transparent", color: "var(--us-deep-teal)", borderWidth: 1, borderStyle: "solid", borderColor: "transparent" },
+  onDark: { background: "transparent", color: "var(--us-white)", borderWidth: 1, borderStyle: "solid", borderColor: "var(--border-on-dark)" },
 };
 
 // Only solid-fill variants get a hover shadow — on a bordered/transparent
