@@ -102,12 +102,17 @@ export function Testimonial() {
             style={{ pointerEvents: "none", position: "absolute", zIndex: 5, x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
           >
             <motion.div
-              style={{ borderRadius: 9999, background: "var(--us-deep-teal)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}
-              animate={{ width: hovered ? 76 : 0, height: hovered ? 76 : 0, opacity: hovered ? 1 : 0 }}
+              style={{
+                borderRadius: 9999, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
+                background: "rgba(4,47,52,0.45)", backdropFilter: "blur(10px) saturate(180%)", WebkitBackdropFilter: "blur(10px) saturate(180%)",
+                border: "1px solid rgba(255,255,255,0.35)", borderTopColor: "rgba(255,255,255,0.55)",
+                boxShadow: "0 4px 16px rgba(4,47,52,0.25), inset 0 1px 0 rgba(255,255,255,0.15)",
+              }}
+              animate={{ width: hovered ? 58 : 0, height: hovered ? 58 : 0, opacity: hovered ? 1 : 0 }}
               transition={{ type: "spring", damping: 20, stiffness: 200 }}
             >
               <motion.span
-                style={{ color: "var(--us-white)", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}
+                style={{ color: "var(--us-white)", fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap" }}
                 animate={{ opacity: hovered ? 1 : 0 }}
                 transition={{ delay: 0.1 }}
               >
