@@ -26,10 +26,8 @@ export default function AboutPage() {
       </section>
 
       <section data-screen-label="About intro" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
-        <div style={{ position: "relative", height: 480, borderRadius: 28, overflow: "hidden", border: "1px solid var(--border-subtle)", background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center", padding: "0 24px" }}>
-            Dubai Marina at dusk, or the team on site — placeholder pending final photography
-          </span>
+        <div style={{ position: "relative", height: 480, borderRadius: 28, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
+          <img src="/about/team-on-site.png" alt="The Ultimate Solutions team on site" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
         <div className="us-grid-2" style={{ marginTop: 80 }}>
           <div>
