@@ -21,7 +21,9 @@ export function HomeCta() {
         dangerouslySetInnerHTML={{
           __html: `
         @media (max-width: 640px) {
-          section[data-screen-label="Home CTA"] .us-split-12-1 { padding: 40px !important; }
+          section[data-screen-label="Home CTA"] .us-split-12-1 { padding: 40px !important; text-align: center; }
+          section[data-screen-label="Home CTA"] .us-split-12-1 p { margin-left: auto; margin-right: auto; }
+          section[data-screen-label="Home CTA"] .us-split-12-1 > div:last-child { align-items: center !important; }
         }
       `,
         }}
