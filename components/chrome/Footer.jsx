@@ -53,7 +53,6 @@ export function Footer() {
             <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 16, fontSize: 15 }}>
               <a href={email.href} className="us-footer-link" style={{ color: "var(--us-mint)", fontWeight: 700 }}>{email.v}</a>
               <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-link" style={{ color: "rgba(255,255,255,0.82)" }}>{basedIn.v}</a>
-              <span style={{ color: "rgba(255,255,255,0.55)" }}>Homeowner and trade enquiries<br />answered within one working day</span>
             </div>
 
             <div style={{ display: "flex", gap: 10, marginTop: 28 }}>
