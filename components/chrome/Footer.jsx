@@ -50,9 +50,15 @@ export function Footer() {
 
           <div>
             <div className="us-footer-heading" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>Contact</div>
-            <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15, color: "rgba(255,255,255,0.72)" }}>
-              <a href={email.href} className="us-footer-contact-row" style={{ border: "none", color: "inherit" }}>Enquiries by email</a>
-              <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-contact-row" style={{ border: "none", color: "inherit" }}>{basedIn.v}</a>
+            <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 14, fontSize: 15, color: "rgba(255,255,255,0.72)" }}>
+              <a href={email.href} className="us-footer-link">
+                <span>Enquiries by email</span>
+                <Icon name="arrow-up-right" size={13} color="var(--us-mint)" />
+              </a>
+              <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-link">
+                <span>{basedIn.v}</span>
+                <Icon name="arrow-up-right" size={13} color="var(--us-mint)" style={{ marginTop: 3 }} />
+              </a>
               <span>Homeowner and trade enquiries<br />answered within one working day</span>
             </div>
 

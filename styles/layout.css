@@ -97,7 +97,15 @@
   .us-panel { padding: 24px !important; }
 }
 
-.us-footer-contact-row { transition: opacity 160ms var(--ease-standard); }
+.us-footer-link {
+  display: inline-flex; align-items: flex-start; gap: 6px;
+  border: none; color: var(--us-white); opacity: 0.88;
+  transition: opacity 160ms var(--ease-standard);
+  width: fit-content;
+}
+.us-footer-link span { border-bottom: 1px solid rgba(255,255,255,0.28); }
+.us-footer-link:hover { opacity: 1; }
+.us-footer-link:hover span { border-bottom-color: var(--us-mint); }
 .us-footer-contact-row:hover { opacity: 0.8; }
 
 /* The testimonial card hides the native cursor in favour of a custom
