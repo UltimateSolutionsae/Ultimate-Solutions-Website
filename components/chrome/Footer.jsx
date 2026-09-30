@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { Logotype } from "../ui/Logotype.jsx";
-import { CATS } from "@/lib/data.js";
+import { Icon } from "../ui/Icon.jsx";
+import { CATS, CONTACT_ROWS, SOCIAL_LINKS } from "@/lib/data.js";
 
 const COMPANY_LINKS = [
   { label: "About", href: "/about" },
@@ -11,6 +12,9 @@ const COMPANY_LINKS = [
 ];
 
 export function Footer() {
+  const email = CONTACT_ROWS.find((r) => r.k === "Email");
+  const basedIn = CONTACT_ROWS.find((r) => r.k === "Based in");
+
   return (
     <footer style={{ background: "var(--us-charcoal-teal)", color: "var(--us-white)", padding: "clamp(44px, 7vw, 72px) clamp(20px, 4vw, 32px) 40px" }}>
       <div style={{ maxWidth: 1240, margin: "0 auto" }}>
@@ -47,9 +51,29 @@ export function Footer() {
           <div>
             <div className="us-footer-heading" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>Contact</div>
             <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15, color: "rgba(255,255,255,0.72)" }}>
-              <span>Enquiries by email</span>
-              <span>Churchill Towers, Business Bay, Office 116, Dubai</span>
+              <a href={email.href} style={{ border: "none", color: "inherit" }}>Enquiries by email</a>
+              <a href={basedIn.href} target="_blank" rel="noopener" style={{ border: "none", color: "inherit" }}>{basedIn.v}</a>
               <span>Homeowner and trade enquiries<br />answered within one working day</span>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, marginTop: 24 }}>
+              {SOCIAL_LINKS.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href || undefined}
+                  aria-label={s.label}
+                  target="_blank"
+                  rel="noopener"
+                  className="us-tap"
+                  style={{
+                    width: 36, height: 36, display: "inline-flex", alignItems: "center", justifyContent: "center",
+                    borderRadius: "var(--radius-pill)", border: "1px solid var(--border-on-dark)", background: "rgba(181,242,219,0.08)",
+                    color: "var(--us-white)", opacity: s.href ? 1 : 0.4, pointerEvents: s.href ? "auto" : "none",
+                  }}
+                >
+                  <Icon name={s.icon} size={16} />
+                </a>
+              ))}
             </div>
           </div>
         </div>

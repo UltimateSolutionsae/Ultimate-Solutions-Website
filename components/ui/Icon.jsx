@@ -16,6 +16,7 @@ const LOCAL_ICONS = new Set([
   "download", "arrow-right", "arrow-up-right", "mail", "phone", "map-pin",
   "clock", "chevron-left", "chevron-right", "user-round",
   "award", "chevron-down", "x", "triangle-alert", "circle-check", "menu",
+  "instagram", "facebook", "linkedin",
 ]);
 
 // KNX-category aliases -> Lucide glyph. Lucide is the only icon set.
