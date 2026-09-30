@@ -97,14 +97,6 @@
   .us-panel { padding: 24px !important; }
 }
 
-.us-footer-icon-chip {
-  flex-shrink: 0;
-  width: 28px; height: 28px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: var(--radius-sm);
-  background: rgba(181,242,219,0.10);
-  border: 1px solid var(--border-on-dark);
-}
 .us-footer-contact-row { transition: opacity 160ms var(--ease-standard); }
 .us-footer-contact-row:hover { opacity: 0.8; }
 

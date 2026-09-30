@@ -50,19 +50,10 @@ export function Footer() {
 
           <div>
             <div className="us-footer-heading" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>Contact</div>
-            <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <a href={email.href} className="us-footer-contact-row" style={{ border: "none", display: "flex", gap: 12, alignItems: "flex-start", color: "inherit" }}>
-                <span className="us-footer-icon-chip"><Icon name="mail" size={15} color="var(--us-mint)" /></span>
-                <span style={{ fontSize: 15, color: "rgba(255,255,255,0.82)", paddingTop: 5 }}>Enquiries by email</span>
-              </a>
-              <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-contact-row" style={{ border: "none", display: "flex", gap: 12, alignItems: "flex-start", color: "inherit" }}>
-                <span className="us-footer-icon-chip"><Icon name="map-pin" size={15} color="var(--us-mint)" /></span>
-                <span style={{ fontSize: 15, color: "rgba(255,255,255,0.82)", paddingTop: 5 }}>{basedIn.v}</span>
-              </a>
-              <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                <span className="us-footer-icon-chip"><Icon name="clock" size={15} color="var(--us-mint)" /></span>
-                <span style={{ fontSize: 15, color: "rgba(255,255,255,0.72)", paddingTop: 5 }}>Homeowner and trade enquiries<br />answered within one working day</span>
-              </div>
+            <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15, color: "rgba(255,255,255,0.72)" }}>
+              <a href={email.href} className="us-footer-contact-row" style={{ border: "none", color: "inherit" }}>Enquiries by email</a>
+              <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-contact-row" style={{ border: "none", color: "inherit" }}>{basedIn.v}</a>
+              <span>Homeowner and trade enquiries<br />answered within one working day</span>
             </div>
 
             <div style={{ display: "flex", gap: 10, marginTop: 28 }}>
