@@ -51,7 +51,10 @@ export function Footer() {
           <div>
             <div className="us-footer-heading" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 20 }}>Contact</div>
             <div className="us-footer-links" style={{ display: "flex", flexDirection: "column", gap: 16, fontSize: 15 }}>
-              <a href={email.href} className="us-footer-link" style={{ color: "var(--us-mint)", fontWeight: 700 }}>{email.v}</a>
+              <a href={email.href} className="us-footer-link" style={{ color: "var(--us-mint)", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <Icon name="mail" size={15} color="var(--us-mint)" />
+                {email.v}
+              </a>
               <a href={basedIn.href} target="_blank" rel="noopener" className="us-footer-link" style={{ color: "rgba(255,255,255,0.82)" }}>{basedIn.v}</a>
             </div>
 
