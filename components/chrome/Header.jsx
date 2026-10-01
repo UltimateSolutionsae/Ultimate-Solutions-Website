@@ -11,7 +11,6 @@ import { NAV } from "@/lib/data.js";
 export function Header() {
   const pathname = usePathname();
   const [progress, setProgress] = React.useState(0);
-  const [navHover, setNavHover] = React.useState(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -64,19 +63,16 @@ export function Header() {
         <nav className="us-nav-desktop" style={{ alignItems: "center", justifyContent: "center", gap: 4, flexWrap: "wrap", flex: "none" }}>
           {NAV.map((n) => {
             const active = isActive(n.href);
-            const hovered = navHover === n.id;
             return (
               <Link
                 key={n.id}
                 href={n.href}
-                onMouseEnter={() => setNavHover(n.id)}
-                onMouseLeave={() => setNavHover(null)}
                 style={{
-                  background: hovered ? "rgba(181,242,219,0.10)" : "transparent",
+                  background: "transparent",
                   border: "none", borderBottom: "none", cursor: "pointer",
                   fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em",
                   padding: "9px 14px", borderRadius: 9999,
-                  transition: "background 200ms var(--ease-standard), color 200ms var(--ease-standard)",
+                  transition: "color 200ms var(--ease-standard)",
                   color: active ? "var(--us-mint)" : "var(--us-white)",
                   display: "inline-block",
                 }}
