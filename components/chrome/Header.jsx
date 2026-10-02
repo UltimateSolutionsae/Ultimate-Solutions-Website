@@ -67,6 +67,7 @@ export function Header() {
               <Link
                 key={n.id}
                 href={n.href}
+                className="us-nav-link"
                 style={{
                   background: "transparent",
                   border: "none", borderBottom: "none", cursor: "pointer",

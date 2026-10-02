@@ -19,6 +19,7 @@
 
 /* Header: desktop nav vs mobile menu toggle */
 .us-nav-desktop { display: flex; }
+.us-nav-link:hover { color: var(--us-mint) !important; }
 .us-header-cta { display: flex; }
 .us-nav-toggle { display: none; }
 
