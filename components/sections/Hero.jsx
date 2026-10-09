@@ -1,6 +1,22 @@
+"use client";
 import React from "react";
+import { motion } from "motion/react";
 import { Button } from "../ui/Button.jsx";
 import { COPY } from "@/lib/data.js";
+import { DUR, EASE, SETTLE_SCALE, STAGGER, REVEAL_Y } from "@/lib/motion.js";
+
+// The page's one choreographed entrance: eyebrow, headline, lead,
+// buttons and stat row rise in sequence, then the hero is still. Every
+// other section on the site reveals on scroll instead.
+//
+// Items carry data-reveal so the <noscript> override in app/layout.js
+// forces them visible: this animates on mount, so without JS the initial
+// variant would otherwise be what a reader is left with.
+const GROUP = { shown: { transition: { staggerChildren: STAGGER } } };
+const ITEM = {
+  hidden: { opacity: 0, y: REVEAL_Y },
+  shown: { opacity: 1, y: 0, transition: { duration: DUR.reveal, ease: EASE } },
+};
 
 // `pad` is the white bezel inside the circular badge. Wide wordmarks sit low
 // in the circle and can run nearly its full width, so they take a small bezel.
@@ -49,21 +65,21 @@ export function Hero() {
         }}
       />
       <div className="us-hero-grid us-container" style={{ position: "relative", paddingBlock: "clamp(48px, 8vw, 88px) clamp(56px, 9vw, 96px)" }}>
-        <div style={{ animation: "usFadeUp 720ms var(--ease-standard) both" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 28 }}>
+        <motion.div variants={GROUP} initial="hidden" animate="shown">
+          <motion.div variants={ITEM} data-reveal="" style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 28 }}>
             {COPY.heroEyebrow}
-          </div>
-          <h1 style={{ margin: 0, fontSize: "clamp(38px, 8.5vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.03em", fontWeight: 800, maxWidth: "14ch" }}>
+          </motion.div>
+          <motion.h1 variants={ITEM} data-reveal="" style={{ margin: 0, fontSize: "clamp(38px, 8.5vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.03em", fontWeight: 800, maxWidth: "14ch" }}>
             {COPY.heroTitle}
-          </h1>
-          <p style={{ margin: "28px 0 0", fontSize: 18, lineHeight: 1.55, color: "rgba(255,255,255,0.78)", maxWidth: "52ch" }}>
+          </motion.h1>
+          <motion.p variants={ITEM} data-reveal="" style={{ margin: "28px 0 0", fontSize: 18, lineHeight: 1.55, color: "rgba(255,255,255,0.78)", maxWidth: "52ch" }}>
             {COPY.heroLead}
-          </p>
-          <div className="us-hero-btns" style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
+          </motion.p>
+          <motion.div variants={ITEM} data-reveal="" className="us-hero-btns" style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
             <Button variant="secondary" size="lg" icon="arrow-right" href="/contact" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta}</Button>
             <Button variant="onDark" size="lg" icon="arrow-up-right" href="/projects" style={{ boxShadow: "0 6px 16px rgba(0,0,0,0.22)" }}>{COPY.cta2}</Button>
-          </div>
-          <div className="us-hero-stats" style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border-on-dark)", flexWrap: "wrap" }}>
+          </motion.div>
+          <motion.div variants={ITEM} data-reveal="" className="us-hero-stats" style={{ display: "flex", gap: 40, marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border-on-dark)", flexWrap: "wrap" }}>
             <div>
               <div className="us-hero-stat-num" style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2007</div>
               <div className="us-hero-stat-lbl" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Founded in Dubai</div>
@@ -76,10 +92,22 @@ export function Hero() {
               <div className="us-hero-stat-num" style={{ fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>2 Decades</div>
               <div className="us-hero-stat-lbl" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>Of intelligent living</div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="us-orbit-wrap" style={{ position: "relative", height: 560, animation: "usFadeUp 720ms 120ms var(--ease-standard) both" }}>
+        {/* The orbit settles from just over full size as the copy rises
+            beside it — one movement, on load, then still. It used to spin
+            on three infinite loops (46s/64s/84s), which drew the eye for
+            the whole time the page was open without ever communicating
+            anything. */}
+        <motion.div
+          className="us-orbit-wrap"
+          data-reveal=""
+          initial={{ opacity: 0, scale: SETTLE_SCALE }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: DUR.reveal, ease: EASE, delay: STAGGER }}
+          style={{ position: "relative", height: 560 }}
+        >
           <div style={{ position: "absolute", top: "50%", right: -160, width: 660, height: 660, transform: "translateY(-50%)" }}>
             <div className="us-orbit us-orbit-1" style={{ position: "absolute", left: "50%", top: "50%", width: 260, height: 260, transform: "translate(-50%,-50%)", borderRadius: 9999, border: "1.5px dotted rgba(255,255,255,0.28)" }}>
               {ORBIT_BADGES_1.map((b, i) => <OrbitBadge key={i} {...b} />)}
@@ -96,16 +124,10 @@ export function Hero() {
               <img src="/logo/us-mark-colour.svg" alt="Ultimate Solutions" style={{ width: 52, height: 52 }} />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <style>{`
-        .us-orbit-1 { animation: usOrbitSpin 46s linear infinite; }
-        .us-orbit-2 { animation: usOrbitSpinRev 64s linear infinite; }
-        .us-orbit-3 { animation: usOrbitSpin 84s linear infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .us-orbit-1, .us-orbit-2, .us-orbit-3 { animation: none; }
-        }
         @media (max-width: 980px) {
           .us-orbit-wrap { display: none; }
         }
