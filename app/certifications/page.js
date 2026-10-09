@@ -25,7 +25,7 @@ export default function CertificationsPage() {
         <h2 style={{ margin: "0 0 48px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Accreditations</h2>
         <div className="us-grid-2">
           {ACCREDITATIONS.map((a) => (
-            <div key={a.name} className="us-accred-card" style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)", display: "flex", gap: 20, alignItems: "flex-start", transition: "transform 200ms var(--ease-standard), box-shadow 200ms var(--ease-standard)" }}>
+            <div key={a.name} className="us-accred-card" style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)", display: "flex", gap: 20, alignItems: "flex-start", transition: "transform var(--duration-hover) var(--ease-out), box-shadow var(--duration-hover) var(--ease-out)" }}>
               <Icon name={a.icon} size={24} color="var(--us-deep-teal)" />
               <div style={{ flex: 1 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
@@ -37,7 +37,7 @@ export default function CertificationsPage() {
             </div>
           ))}
         </div>
-        <style>{`.us-accred-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }`}</style>
+        <style>{`.us-accred-card:hover { transform: translateY(var(--lift-card)); box-shadow: var(--shadow-lg); }`}</style>
       </section>
 
       <section data-screen-label="Brands" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
@@ -90,7 +90,7 @@ export default function CertificationsPage() {
           </p>
           <div className="us-partners-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,minmax(0,1fr))", gap: 1, background: "var(--border-strong)", border: "1px solid var(--border-strong)", borderRadius: 20, overflow: "hidden" }}>
             {PARTNERS.map((p) => (
-              <div key={p.name} className="us-partner-cell" style={{ background: "var(--surface-page)", padding: "32px 24px", display: "flex", flexDirection: "column", gap: 8, minHeight: 150, transition: "background 200ms var(--ease-standard)" }}>
+              <div key={p.name} className="us-partner-cell us-row-hover" style={{ background: "var(--surface-page)", padding: "32px 24px", display: "flex", flexDirection: "column", gap: 8, minHeight: 150 }}>
                 <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.01em" }}>{p.name}</div>
                 <div style={{ fontSize: 13, color: "var(--text-secondary)", flex: 1 }}>{p.scope}</div>
                 <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-deep-teal)" }}>{p.tier}</div>
@@ -100,7 +100,6 @@ export default function CertificationsPage() {
           <style
             dangerouslySetInnerHTML={{
               __html: `
-          .us-partner-cell:hover { background: var(--surface-mint-wash); }
           @media (max-width: 900px) { .us-partners-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; } }
           @media (max-width: 560px) { .us-partners-grid { grid-template-columns: minmax(0,1fr) !important; } }
         `,
@@ -116,7 +115,7 @@ export default function CertificationsPage() {
         </p>
         <div style={{ borderTop: "1px solid var(--border-subtle)" }}>
           {DOWNLOADS.map((d) => (
-            <div key={d.name} className="us-download-row" style={{ display: "flex", alignItems: "center", gap: 24, paddingBlock: "22px", borderBottom: "1px solid var(--border-subtle)", transition: "background 200ms var(--ease-standard)", flexWrap: "wrap" }}>
+            <div key={d.name} className="us-row-hover" style={{ display: "flex", alignItems: "center", gap: 24, paddingBlock: "22px", borderBottom: "1px solid var(--border-subtle)", flexWrap: "wrap" }}>
               <Icon name="file-text" size={20} color="var(--us-deep-teal)" />
               <div style={{ flex: 1, minWidth: 200 }}>
                 <div style={{ fontSize: 16, fontWeight: 600 }}>{d.name}</div>
@@ -127,7 +126,6 @@ export default function CertificationsPage() {
             </div>
           ))}
         </div>
-        <style>{`.us-download-row:hover { background: var(--surface-subtle); }`}</style>
       </section>
     </div>
   );

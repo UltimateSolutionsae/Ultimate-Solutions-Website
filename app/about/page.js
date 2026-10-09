@@ -2,7 +2,6 @@ import { Icon } from "@/components/ui/Icon.jsx";
 import { Badge } from "@/components/ui/Badge.jsx";
 import { StatCard } from "@/components/ui/StatCard.jsx";
 import { FaqAccordion } from "@/components/ui/FaqAccordion.jsx";
-import { Reveal } from "@/components/ui/Reveal.jsx";
 import { TIMELINE, AWARDS, PRESS, ABOUT_FAQS } from "@/lib/data.js";
 
 export const metadata = {
@@ -65,14 +64,13 @@ export default function AboutPage() {
           </p>
           <div style={{ borderTop: "1px solid var(--border-strong)" }}>
             {TIMELINE.map((t) => (
-              <div key={t.year} className="us-timeline-row us-timeline-hover" style={{ paddingBlock: "32px", borderBottom: "1px solid var(--border-strong)", alignItems: "start", transition: "background 200ms var(--ease-standard)" }}>
+              <div key={t.year} className="us-timeline-row us-row-hover us-row-hover-on-dark" style={{ paddingBlock: "32px", borderBottom: "1px solid var(--border-strong)", alignItems: "start" }}>
                 <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.02em", color: "var(--us-deep-teal)" }}>{t.year}</div>
                 <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.25 }}>{t.title}</h3>
                 <p style={{ margin: 0, fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.55, whiteSpace: "pre-line" }}>{t.body}</p>
               </div>
             ))}
           </div>
-          <style>{`.us-timeline-hover:hover { background: rgba(255,255,255,0.55); }`}</style>
         </div>
       </section>
 
@@ -112,7 +110,7 @@ export default function AboutPage() {
           </p>
           <div style={{ borderTop: "1px solid var(--border-subtle)" }}>
             {PRESS.map((p) => (
-              <a key={p.title} href={p.url} target="_blank" rel="noopener" className="us-bare us-press-row" style={{ display: "flex", alignItems: "center", gap: 24, paddingBlock: "22px", borderBottom: "1px solid var(--border-subtle)", transition: "background 200ms var(--ease-standard)", textDecoration: "none", color: "inherit" }}>
+              <a key={p.title} href={p.url} target="_blank" rel="noopener" className="us-bare us-row-hover us-row-hover-on-dark" style={{ display: "flex", alignItems: "center", gap: 24, paddingBlock: "22px", borderBottom: "1px solid var(--border-subtle)", textDecoration: "none", color: "inherit" }}>
                 <Icon name="file-text" size={20} color="var(--us-deep-teal)" />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 16, fontWeight: 600 }}>{p.title}</div>
@@ -122,7 +120,6 @@ export default function AboutPage() {
               </a>
             ))}
           </div>
-          <style>{`.us-press-row:hover { background: rgba(255,255,255,0.6); }`}</style>
         </div>
       </section>
     </div>

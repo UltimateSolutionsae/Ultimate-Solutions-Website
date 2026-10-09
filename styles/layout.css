@@ -98,10 +98,20 @@
   .us-panel { padding: 24px !important; }
 }
 
+/* The one hover treatment for full-width rows — timeline entries, press
+   links, download rows, partner cells. A row is not a card: it has no
+   edges of its own, so it washes rather than lifting. Replaces four
+   near-identical one-off rules that each inlined their own timing. */
+.us-row-hover {
+  transition: background var(--duration-hover) var(--ease-out);
+}
+.us-row-hover:hover { background: var(--surface-subtle); }
+.us-row-hover-on-dark:hover { background: rgba(255,255,255,0.55); }
+
 .us-footer-link {
   display: inline-block;
   border: none; opacity: 0.9;
-  transition: opacity 160ms var(--ease-standard);
+  transition: opacity var(--duration-hover) var(--ease-out);
   width: fit-content;
 }
 .us-footer-link:hover { opacity: 0.7; }

@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
+import { motion } from "motion/react";
 import { Icon } from "../ui/Icon.jsx";
 import { Input } from "../ui/Input.jsx";
 import { Button } from "../ui/Button.jsx";
 import { COPY, CATS, CONTACT_ROWS } from "@/lib/data.js";
+import { PRESS_SCALE, SPRING, cssTransition } from "@/lib/motion.js";
 
 const PILL_ON = { bg: "var(--us-deep-teal)", fg: "var(--us-white)", bd: "var(--us-deep-teal)" };
 const PILL_OFF = { bg: "transparent", fg: "var(--text-secondary)", bd: "var(--border-subtle)" };
@@ -99,15 +101,17 @@ export function ContactClient() {
                 <Input label={COPY.formField} placeholder={COPY.formPlaceholder} value={form.detail} onChange={(e) => setForm((f) => ({ ...f, detail: e.target.value }))} multiline resizable={false} rows={5} />
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 12 }}>Disciplines of interest</div>
-                  <button
+                  <motion.button
                     type="button"
                     onClick={toggleAll}
                     className="us-tap"
                     aria-pressed={allSelected}
+                    whileTap={{ scale: PRESS_SCALE, transition: SPRING }}
                     style={{
                       cursor: "pointer", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
                       fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 700, padding: "12px 16px",
-                      borderRadius: "var(--radius-sm)", marginBottom: 10, transition: "all 200ms var(--ease-standard)",
+                      borderRadius: "var(--radius-sm)", marginBottom: 10,
+                      transition: cssTransition(["background", "color", "border-color"]),
                       background: allSelected ? "var(--us-deep-teal)" : "var(--us-mint-wash)",
                       color: allSelected ? "var(--us-white)" : "var(--us-deep-teal)",
                       border: `1.5px solid ${allSelected ? "var(--us-deep-teal)" : "var(--us-mint-deep)"}`,
@@ -115,22 +119,29 @@ export function ContactClient() {
                   >
                     <Icon name="check" size={16} />
                     All Disciplines
-                  </button>
+                  </motion.button>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {CATS.map((c) => {
                       const on = interests.includes(c.label);
                       const skin = on ? PILL_ON : PILL_OFF;
                       return (
-                        <button
+                        <motion.button
                           key={c.id}
                           type="button"
                           onClick={() => toggleInterest(c.label)}
                           className="us-tap"
                           aria-pressed={on}
-                          style={{ cursor: "pointer", fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, padding: "9px 16px", borderRadius: 9999, transition: "all 200ms var(--ease-standard)", background: skin.bg, color: skin.fg, border: `1px solid ${skin.bd}`, justifyContent: "center" }}
+                          whileTap={{ scale: PRESS_SCALE, transition: SPRING }}
+                          style={{
+                            cursor: "pointer", fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600,
+                            padding: "9px 16px", borderRadius: 9999, justifyContent: "center",
+                            transition: cssTransition(["background", "color", "border-color"]),
+                            background: skin.bg, color: skin.fg,
+                            borderWidth: 1, borderStyle: "solid", borderColor: skin.bd,
+                          }}
                         >
                           {c.label}
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>

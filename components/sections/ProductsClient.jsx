@@ -6,7 +6,6 @@ import { Tabs } from "../ui/Tabs.jsx";
 import { Icon } from "../ui/Icon.jsx";
 import { Button } from "../ui/Button.jsx";
 import { FaqAccordion } from "../ui/FaqAccordion.jsx";
-import { Reveal } from "../ui/Reveal.jsx";
 import { COPY, CATS, getCategory } from "@/lib/data.js";
 import { T } from "@/lib/motion.js";
 
