@@ -111,21 +111,26 @@
 --scrim-flat:rgba(4,47,52,0.62);
 --blur-panel:blur(14px);
 
-/* --- Motion --- */
---ease-standard:cubic-bezier(0.16,1,0.3,1);
+/* --- Motion ---
+   One vocabulary for the whole site, mirrored in lib/motion.js. Components
+   must not define their own curves or durations: use these tokens for
+   colour/shadow/border fades, and the JS exports for anything
+   spring-driven. Only transform and opacity are animated — never width,
+   height, top or left. */
 --ease-out:cubic-bezier(0.16,1,0.3,1);
---ease-in-out:cubic-bezier(0.5,0,0.3,1);
---ease-overshoot:cubic-bezier(0.34,1.4,0.5,1);
---duration-press:120ms;
---duration-fast:200ms;
---duration-base:380ms;
---duration-slow:520ms;
---duration-reveal:720ms;
---stagger-reveal:120ms;
+/* Legacy alias, kept only while the section-by-section migration runs.
+   Remove once no usages remain. */
+--ease-standard:var(--ease-out);
+--duration-press:150ms;
+--duration-hover:250ms;
+--duration-ui:500ms;
+--duration-exit:350ms;
+--duration-reveal:800ms;
+--stagger-reveal:80ms;
 --lift-button:-2px;
---lift-card:-5px;
---press-scale:0.965;
---transition-base:all var(--duration-base) var(--ease-standard);
+--lift-card:-6px;
+--press-scale:0.97;
+--image-zoom:1.04;
 
 /* --- Fonts --- */
 --font-core:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -137,7 +142,7 @@ html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--font-core);font-weight:var(--weight-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--text-primary);background:var(--surface-page);-webkit-font-smoothing:antialiased;text-wrap:pretty}
 h1,h2,h3,h4,h5,h6{font-family:var(--font-core);font-weight:var(--weight-heading);letter-spacing:var(--tracking-heading);line-height:var(--leading-heading);margin:0}
 p{text-wrap:pretty}
-a{color:var(--text-link);text-decoration:none;border-bottom:1px solid var(--border-strong);transition:color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard)}
+a{color:var(--text-link);text-decoration:none;border-bottom:1px solid var(--border-strong);transition:color var(--duration-hover) var(--ease-out),border-color var(--duration-hover) var(--ease-out)}
 a:hover{color:var(--text-link-hover);border-bottom-color:var(--us-mint-deep)}
 a.us-bare,a.us-bare:hover{border-bottom:none}
 button{font-family:var(--font-core)}
@@ -149,14 +154,31 @@ img{max-width:100%;display:block}
 .us-narrow{max-width:var(--container-narrow);margin:0 auto;padding-left:32px;padding-right:32px}
 
 @keyframes usFadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-@keyframes usFadeBlur { from { opacity:0; filter:blur(16px); transform:scale(1.04); } to { opacity:1; filter:blur(0); transform:scale(1); } }
-@keyframes usFadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes usCharRise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 @keyframes usOrbitSpin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
 @keyframes usOrbitSpinRev { from { transform:translate(-50%,-50%) rotate(360deg); } to { transform:translate(-50%,-50%) rotate(0deg); } }
 
-.us-reveal{animation:usFadeUp var(--duration-reveal) var(--ease-standard) both}
+/* The one shared card hover response, used by components/ui/Card.jsx:
+   the card lifts and deepens its shadow while any image it holds zooms
+   slowly. Scoped to .us-card-media so a card's non-photographic content
+   (icons, logos) is left alone. */
+.us-card-media { overflow:hidden }
+.us-card-media img { transition:transform var(--duration-ui) var(--ease-out); will-change:transform }
+.us-card:hover .us-card-media img { transform:scale(var(--image-zoom)) }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  /* Also zero transition-delay and animation-delay: collapsing only the
+     duration still leaves staggered content waiting out its delay before
+     appearing, which is the exact lag this preference asks us to drop. */
+  *, *::before, *::after {
+    animation-duration:0.01ms !important; animation-delay:0ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important; transition-delay:0ms !important;
+    scroll-behavior:auto !important;
+  }
+  .us-card:hover .us-card-media img { transform:none }
 }
+
+/* Reveals are marked [data-reveal] so the <noscript> override in
+   app/layout.js can force them visible: without JavaScript the observer
+   never fires, and their hidden state must not be what a reader is left
+   with. Reveal.jsx also carries a timer failsafe for the same reason. */

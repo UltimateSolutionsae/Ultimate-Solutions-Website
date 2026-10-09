@@ -3,6 +3,7 @@ import { MotionConfig } from "motion/react";
 import { Header } from "@/components/chrome/Header.jsx";
 import { Footer } from "@/components/chrome/Footer.jsx";
 import { ScrollToTop } from "@/components/chrome/ScrollToTop.jsx";
+import { SPRING } from "@/lib/motion.js";
 
 export const metadata = {
   title: "Ultimate Solutions — KNX Systems Integration, Dubai",
@@ -14,7 +15,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <MotionConfig reducedMotion="user" transition={{ type: "spring", bounce: 0, duration: 0.4 }}>
+        {/* Scroll reveals hide themselves in JS and un-hide on
+            intersection. With JS unavailable that never happens, so force
+            them visible rather than leave the page blank. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
+        {/* One default transition for the whole tree: the shared
+            interface spring from lib/motion.js. reducedMotion="user"
+            makes Motion drop transform animations when the OS asks. */}
+        <MotionConfig reducedMotion="user" transition={SPRING}>
           <ScrollToTop />
           <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
             <Header />

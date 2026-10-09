@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Icon } from "./Icon.jsx";
+import { cssTransition } from "@/lib/motion.js";
 
 export function Input({ label, hint, error, icon, type = "text", multiline, resizable = true, rows = 4, value, onChange, placeholder, disabled, id, style, ...rest }) {
   const [focus, setFocus] = React.useState(false);
@@ -12,7 +13,7 @@ export function Input({ label, hint, error, icon, type = "text", multiline, resi
     fontWeight: "var(--weight-body)", color: "var(--text-primary)", background: disabled ? "var(--surface-subtle)" : "var(--surface-page)",
     padding: multiline ? "12px 14px" : icon ? "12px 14px 12px 42px" : "12px 14px",
     border: "1px solid " + border, borderRadius: "var(--radius-sm)", outline: "none",
-    transition: "border-color var(--duration-base) var(--ease-standard)", resize: multiline ? (resizable ? "vertical" : "none") : undefined,
+    transition: cssTransition("border-color"), resize: multiline ? (resizable ? "vertical" : "none") : undefined,
   };
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6, ...style }}>

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Icon } from "./Icon.jsx";
+import { cssTransition } from "@/lib/motion.js";
 
 export function Tag({ children, icon, selected, onClick, onRemove, style, ...rest }) {
   const [hover, setHover] = React.useState(false);
@@ -14,7 +15,7 @@ export function Tag({ children, icon, selected, onClick, onRemove, style, ...res
         display: "inline-flex", alignItems: "center", gap: 8, height: 36, padding: "0 16px",
         borderRadius: "var(--radius-pill)", fontFamily: "var(--font-core)", fontSize: "var(--text-sm)",
         fontWeight: "var(--weight-body)", cursor: clickable ? "pointer" : "default",
-        transition: "var(--transition-base)",
+        transition: cssTransition(["background", "color", "border-color"]),
         background: selected ? "var(--us-deep-teal)" : hover && clickable ? "var(--surface-subtle)" : "transparent",
         color: selected ? "var(--us-white)" : "var(--text-primary)",
         border: "1px solid " + (selected ? "var(--us-deep-teal)" : "var(--border-subtle)"),

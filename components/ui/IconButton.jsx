@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Icon } from "./Icon.jsx";
+import { LIFT, PRESS_SCALE, SPRING, cssTransition } from "@/lib/motion.js";
 
 const SIZES = { sm: 32, md: 40, lg: 48 };
 
@@ -25,11 +26,12 @@ export function IconButton({ icon, label, variant = "outline", size = "md", disa
       type="button" aria-label={label} disabled={disabled} onClick={onClick}
       className="us-icon-btn"
       onHoverStart={() => setHover(true)} onHoverEnd={() => setHover(false)}
-      whileTap={disabled ? undefined : { scale: 0.965, transition: { type: "spring", bounce: 0, duration: 0.15 } }}
+      whileHover={disabled ? undefined : { y: LIFT.button, transition: SPRING }}
+      whileTap={disabled ? undefined : { scale: PRESS_SCALE, y: 0, transition: SPRING }}
       style={{
         width: box, height: box, display: "inline-flex", alignItems: "center", justifyContent: "center",
         borderRadius: "var(--radius-pill)", cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.4 : 1,
-        transition: "background 200ms var(--ease-standard), border-color 200ms var(--ease-standard)",
+        transition: cssTransition(["background", "border-color"]),
         ...skins[variant], ...(hover && !disabled ? hovers[variant] : null), ...style,
       }}
       {...rest}
