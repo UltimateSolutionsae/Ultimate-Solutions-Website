@@ -9,11 +9,17 @@ const SIZES = { sm: 32, md: 40, lg: 48 };
 export function IconButton({ icon, label, variant = "outline", size = "md", disabled, onClick, style, ...rest }) {
   const [hover, setHover] = React.useState(false);
   const box = SIZES[size] || SIZES.md;
+  // borderWidth/borderStyle/borderColor as separate longhands, not the
+  // `border` shorthand — `hovers` below only overrides borderColor, and
+  // mixing the shorthand with that longhand across renders is a known
+  // React inline-style bug: toggling hover left stale per-side border
+  // colours behind. Button.jsx carries the same fix for the same reason.
+  const line = { borderWidth: 1, borderStyle: "solid" };
   const skins = {
-    solid: { background: "var(--us-deep-teal)", color: "var(--us-white)", border: "1px solid var(--us-deep-teal)" },
-    outline: { background: "var(--surface-page)", color: "var(--us-deep-teal)", border: "1px solid var(--border-subtle)" },
-    ghost: { background: "transparent", color: "var(--us-deep-teal)", border: "1px solid transparent" },
-    onDark: { background: "rgba(181,242,219,0.08)", color: "var(--us-white)", border: "1px solid var(--border-on-dark)" },
+    solid: { background: "var(--us-deep-teal)", color: "var(--us-white)", ...line, borderColor: "var(--us-deep-teal)" },
+    outline: { background: "var(--surface-page)", color: "var(--us-deep-teal)", ...line, borderColor: "var(--border-subtle)" },
+    ghost: { background: "transparent", color: "var(--us-deep-teal)", ...line, borderColor: "transparent" },
+    onDark: { background: "rgba(181,242,219,0.08)", color: "var(--us-white)", ...line, borderColor: "var(--border-on-dark)" },
   };
   const hovers = {
     solid: { background: "var(--us-deep-teal-tint)" },
