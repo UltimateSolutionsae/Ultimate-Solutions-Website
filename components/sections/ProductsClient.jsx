@@ -8,6 +8,7 @@ import { Button } from "../ui/Button.jsx";
 import { FaqAccordion } from "../ui/FaqAccordion.jsx";
 import { Reveal } from "../ui/Reveal.jsx";
 import { COPY, CATS, getCategory } from "@/lib/data.js";
+import { T } from "@/lib/motion.js";
 
 // Same photos used for the home page's "Six Disciplines" tiles.
 const CATEGORY_HERO = {
@@ -65,9 +66,8 @@ export function ProductsClient() {
           key={cat.id}
           className="us-split-16-1"
           initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -14 }}
-          transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+          animate={{ opacity: 1, y: 0, transition: T.ui }}
+          exit={{ opacity: 0, y: -14, transition: T.exit }}
         >
           <div style={{ minWidth: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 14, minWidth: 0, flexWrap: "wrap" }}>

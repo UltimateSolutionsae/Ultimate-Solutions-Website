@@ -2,7 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import { Tag } from "../ui/Tag.jsx";
+import { Card } from "../ui/Card.jsx";
 import { Reveal } from "../ui/Reveal.jsx";
+import { SegmentedControl } from "../ui/SegmentedControl.jsx";
 import { PROJECTS } from "@/lib/data.js";
 
 export function ProjectsClient() {
@@ -18,45 +20,30 @@ export function ProjectsClient() {
         <p style={{ margin: "24px 0 0", fontSize: 18, color: "var(--text-secondary)", maxWidth: "56ch" }}>
           Developments are named where the client has cleared it; private residences are shown by area only. Full project details are available to consultants on request.
         </p>
-        <div style={{ display: "flex", gap: 8, marginTop: 48, flexWrap: "wrap" }}>
-          {types.map((t) => {
-            const on = t === filter;
-            return (
-              <button
-                key={t}
-                onClick={() => setFilter(t)}
-                className="us-tap"
-                aria-pressed={on}
-                style={{
-                  cursor: "pointer", fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, padding: "9px 18px",
-                  justifyContent: "center",
-                  borderRadius: 9999, transition: "all 200ms var(--ease-standard)",
-                  background: on ? "var(--us-deep-teal)" : "transparent",
-                  color: on ? "var(--us-white)" : "var(--text-secondary)",
-                  border: "1px solid " + (on ? "var(--us-deep-teal)" : "var(--border-subtle)"),
-                }}
-              >
-                {t}
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          items={types}
+          value={filter}
+          onChange={setFilter}
+          ariaLabel="Filter projects by type"
+          style={{ marginTop: 48 }}
+        />
       </section>
 
       <section data-screen-label="Projects grid" style={{ paddingBlock: "32px clamp(56px, 9vw, 96px)" }} className="us-container">
         <div className="us-grid-3">
           {visible.map((p, i) => (
-            <Reveal key={p.id} delay={Math.min(i, 7) * 120} style={{ height: "100%" }}>
+            <Reveal key={p.id} index={i} style={{ height: "100%" }}>
+              <Card style={{ height: "100%", borderRadius: 20 }}>
               <Link
                 href={`/projects/${p.id}`}
-                className="us-bare us-project-card"
+                className="us-bare"
                 style={{
                   cursor: "pointer", display: "flex", flexDirection: "column", background: "var(--surface-card)",
-                  border: "1px solid var(--border-subtle)", borderRadius: 20, overflow: "hidden", boxShadow: "var(--shadow-sm)",
-                  transition: "transform 200ms var(--ease-standard)", height: "100%",
+                  border: "1px solid var(--border-subtle)", borderRadius: 20, overflow: "hidden",
+                  height: "100%",
                 }}
               >
-                <div style={{ position: "relative", height: 240 }}>
+                <div className="us-card-media" style={{ position: "relative", height: 240, flex: "none" }}>
                   <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ padding: 28, display: "flex", flexDirection: "column", flex: 1 }}>
@@ -72,12 +59,10 @@ export function ProjectsClient() {
                   </div>
                 </div>
               </Link>
+              </Card>
             </Reveal>
           ))}
         </div>
-        <style>{`
-          .us-project-card:hover { transform: translateY(-5px); }
-        `}</style>
       </section>
     </div>
   );
