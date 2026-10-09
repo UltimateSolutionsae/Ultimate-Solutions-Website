@@ -15,7 +15,7 @@ export function Process() {
         <div aria-hidden="true" className="us-process-rule" style={{ position: "absolute", top: 20, left: 0, right: 0, height: 1, background: "var(--border-strong)" }} />
         <div className="us-process-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5,minmax(0,1fr))", gap: 24, position: "relative", minWidth: 0 }}>
           {PROCESS.map((p, i) => (
-            <Reveal as="div" key={p.num} delay={Math.min(i, 7) * 120} style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+            <Reveal as="div" key={p.num} index={i} style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
               <div style={{ width: 40, height: 40, borderRadius: 9999, background: "var(--us-deep-teal)", color: "var(--us-white)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 800, flex: "none", position: "relative", zIndex: 1 }}>
                 {p.num}
               </div>

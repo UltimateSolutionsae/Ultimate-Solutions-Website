@@ -41,7 +41,7 @@ export function DepthBand() {
           </div>
         </Reveal>
 
-        <Reveal as="aside" delay={120} style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)" }}>
+        <Reveal as="aside" index={1} style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)" }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>How We Work</div>
           <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 0 }}>
             {SIDEBAR.map((s) => (

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "../ui/Button.jsx";
 import { Tag } from "../ui/Tag.jsx";
+import { Card } from "../ui/Card.jsx";
 import { Reveal } from "../ui/Reveal.jsx";
 import { COPY, PROJECTS } from "@/lib/data.js";
 
@@ -17,11 +18,21 @@ export function SelectedProjects() {
       </div>
       <div className="us-grid-3">
         {PROJECTS.slice(0, 3).map((p, i) => (
-          <Reveal key={p.id} delay={Math.min(i, 7) * 120}>
+          <Reveal key={p.id} index={i}>
+            {/* These cards had no hover state at all. The shared Card
+                gives them the same lift, shadow and image zoom as every
+                other card on the site; the shadow sits on the photo
+                rather than the whole card, since the text below it is on
+                the page background, not on a surface. */}
             <Link href={`/projects/${p.id}`} className="us-bare" style={{ cursor: "pointer", display: "block" }}>
-              <div style={{ position: "relative", height: 280, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
-                <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              </div>
+              <Card
+                restShadow="none"
+                style={{ height: 280, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)" }}
+              >
+                <div className="us-card-media" style={{ position: "absolute", inset: 0 }}>
+                  <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+              </Card>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 20 }}>
                 <Tag>{p.type}</Tag>
                 <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>{p.year}</span>

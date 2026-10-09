@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
+import { Card } from "../ui/Card.jsx";
 import { Reveal } from "../ui/Reveal.jsx";
 import { COPY } from "@/lib/data.js";
 
@@ -16,23 +16,22 @@ const TILES = [
 
 function Tile({ t }) {
   const router = useRouter();
-  const [hover, setHover] = React.useState(false);
   return (
-    <motion.div
+    <Card
       onClick={() => router.push(`/products?category=${t.id}`)}
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
-      whileHover={{ y: -6, transition: { type: "spring", bounce: 0, duration: 0.35 } }}
-      whileTap={{ scale: 0.98, transition: { type: "spring", bounce: 0, duration: 0.15 } }}
+      restShadow="none"
+      // The photo fills the tile, so it carries the shared slow zoom; the
+      // gradient scrim and the caption sit outside .us-card-media so they
+      // stay put while it moves.
       style={{
-        position: "relative", height: 380, borderRadius: 20, overflow: "hidden", cursor: "pointer",
+        height: 380, borderRadius: 20, overflow: "hidden", cursor: "pointer",
         border: "1px solid var(--border-subtle)",
-        transition: "box-shadow 380ms var(--ease-standard)",
-        boxShadow: hover ? "var(--shadow-lg)" : "none",
       }}
     >
       {t.img ? (
-        <img src={t.img} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <div className="us-card-media" style={{ position: "absolute", inset: 0 }}>
+          <img src={t.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        </div>
       ) : (
         <div style={{ position: "absolute", inset: 0, background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
           <span style={{ fontSize: 12, color: "var(--text-secondary)", textAlign: "center" }}>{t.placeholder}</span>
@@ -46,7 +45,7 @@ function Tile({ t }) {
         <h3 style={{ margin: 0, fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1 }}>{t.title}</h3>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "rgba(255,255,255,0.8)" }}>{t.desc}</p>
       </div>
-    </motion.div>
+    </Card>
   );
 }
 
