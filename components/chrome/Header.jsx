@@ -2,27 +2,22 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll } from "motion/react";
 import { Logotype } from "../ui/Logotype.jsx";
 import { Button } from "../ui/Button.jsx";
 import { IconButton } from "../ui/IconButton.jsx";
 import { NAV } from "@/lib/data.js";
+import { SPRING, SPRING_SOFT, T } from "@/lib/motion.js";
 
 export function Header() {
   const pathname = usePathname();
-  const [progress, setProgress] = React.useState(0);
   const [menuOpen, setMenuOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const scrollable = h.scrollHeight - h.clientHeight;
-      setProgress(scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
+  // Read progress is driven straight from Motion's scroll hook rather
+  // than a window scroll listener feeding React state: the value updates
+  // off the main render path, in sync with the frame, so the bar needs no
+  // catch-up transition to look smooth.
+  const { scrollYProgress } = useScroll();
 
   // Close the menu on navigation, on Escape, and if the viewport grows back
   // to desktop while it is open.
@@ -60,6 +55,12 @@ export function Header() {
           </Link>
         </div>
 
+        {/* The active item carries a single highlight rule that glides
+            between links on the shared spring as you navigate, so the nav
+            shows which section you moved to rather than just recolouring
+            in place. Hover stays a colour shift (.us-nav-link in
+            layout.css) — a real CSS :hover, not JS state, so it can never
+            stick after a click. */}
         <nav className="us-nav-desktop" style={{ alignItems: "center", justifyContent: "center", gap: 4, flexWrap: "wrap", flex: "none" }}>
           {NAV.map((n) => {
             const active = isActive(n.href);
@@ -69,15 +70,27 @@ export function Header() {
                 href={n.href}
                 className="us-nav-link"
                 style={{
+                  position: "relative",
                   background: "transparent",
                   border: "none", borderBottom: "none", cursor: "pointer",
                   fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em",
                   padding: "9px 14px", borderRadius: 9999,
-                  transition: "color 200ms var(--ease-standard)",
+                  transition: "color var(--duration-hover) var(--ease-out)",
                   color: active ? "var(--us-mint)" : "var(--us-white)",
                   display: "inline-block",
                 }}
               >
+                {active && (
+                  <motion.span
+                    aria-hidden="true"
+                    layoutId="us-nav-highlight"
+                    transition={SPRING}
+                    style={{
+                      position: "absolute", left: 14, right: 14, bottom: 2, height: 2,
+                      borderRadius: 2, background: "var(--us-mint)",
+                    }}
+                  />
+                )}
                 {n.label}
               </Link>
             );
@@ -103,12 +116,11 @@ export function Header() {
         </div>
       </div>
 
-      <div
+      <motion.div
         aria-hidden="true"
         style={{
           position: "absolute", left: 0, right: 0, bottom: 0, height: 2, background: "var(--us-mint)",
-          opacity: 0.5, transformOrigin: "left", transform: `scaleX(${progress})`,
-          transition: "transform 120ms linear",
+          opacity: 0.5, transformOrigin: "left", scaleX: scrollYProgress,
         }}
       />
 
@@ -117,9 +129,9 @@ export function Header() {
           <motion.div
             id="us-mobile-menu"
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ type: "spring", bounce: 0, duration: 0.32 }}
+            animate={{ opacity: 1, y: 0, transition: SPRING_SOFT }}
+            exit={{ opacity: 0, y: -8, transition: T.exit }}
+            transition={SPRING_SOFT}
             style={{
               position: "absolute", top: "100%", left: 0, right: 0,
               background: "rgba(4,47,52,0.97)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)",
