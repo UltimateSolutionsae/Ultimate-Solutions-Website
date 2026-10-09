@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
 import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "motion/react";
 import { IconButton } from "../ui/IconButton.jsx";
+import { DUR, MS, SPRING_SOFT, STAGGER, T } from "@/lib/motion.js";
 
 /**
  * Interactive gallery row: one item is "active" (wide) at a time, the rest
@@ -14,16 +16,24 @@ import { IconButton } from "../ui/IconButton.jsx";
  * in from nowhere — matches the "anchor interactions to their source"
  * principle used for motion elsewhere on the site.
  */
+const CHROME_GROUP = {
+  hidden: { transition: { staggerChildren: 0 } },
+  shown: { transition: { delayChildren: DUR.exit, staggerChildren: STAGGER } },
+};
+const CHROME_ITEM = {
+  hidden: { opacity: 0, y: 8, transition: T.exit },
+  shown: { opacity: 1, y: 0, transition: T.ui },
+};
+
 export function ProjectGallery({ items }) {
   const [active, setActive] = React.useState(0);
   const track = items.map((_, i) => (i === active ? "5fr" : "1fr")).join(" ");
 
   const thumbRefs = React.useRef([]);
   const [openIndex, setOpenIndex] = React.useState(null);
-  const [rect, setRect] = React.useState(null);
-  const [animate, setAnimate] = React.useState(false);
-  const [controlsVisible, setControlsVisible] = React.useState(false);
-  const closeTimerRef = React.useRef(null);
+  // Where the panel starts from and returns to, expressed purely as a
+  // transform away from its final resting place.
+  const [from, setFrom] = React.useState({ x: 0, y: 0, scale: 0.9 });
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
@@ -51,38 +61,40 @@ export function ProjectGallery({ items }) {
       width, height,
     };
   }
-  function rectOf(el) {
-    const r = el.getBoundingClientRect();
-    return { left: r.left, top: r.top, width: r.width, height: r.height };
+  // The panel is always laid out at its final size and position. Opening
+  // and closing is then a pure transform away from that — a uniform
+  // scale plus an offset between the two centres — rather than four
+  // animated layout properties (left, top, width, height) on a
+  // full-screen element, which is what this used to do.
+  //
+  // The scale is uniform, not one factor per axis: a thumbnail and the
+  // expanded view have different aspect ratios, so scaling each axis
+  // separately would visibly squash the photo on the way out. With
+  // object-fit: contain, a uniform scale just makes it smaller.
+  function offsetFrom(el) {
+    if (!el) return { x: 0, y: 0, scale: 0.9 };
+    const t = el.getBoundingClientRect();
+    const f = fullRect();
+    return {
+      x: (t.left + t.width / 2) - (f.left + f.width / 2),
+      y: (t.top + t.height / 2) - (f.top + f.height / 2),
+      scale: t.width / f.width,
+    };
   }
 
   function openLightbox(i) {
     const el = thumbRefs.current[i];
     if (!el) return;
-    window.clearTimeout(closeTimerRef.current);
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setFrom(offsetFrom(el));
     setOpenIndex(i);
-    setAnimate(false);
-    setControlsVisible(false);
-    setRect(reduceMotion ? fullRect() : rectOf(el));
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setAnimate(true);
-        setRect(fullRect());
-        setControlsVisible(true);
-      });
-    });
   }
 
   function closeLightbox() {
     if (openIndex == null) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setControlsVisible(false);
-    const el = thumbRefs.current[openIndex];
-    const target = reduceMotion ? rect : el ? rectOf(el) : rect;
-    setAnimate(true);
-    setRect(target);
-    closeTimerRef.current = window.setTimeout(() => setOpenIndex(null), reduceMotion ? 0 : 480);
+    // Recompute against the thumbnail as it is now — the strip's active
+    // item may have changed while the lightbox was open.
+    setFrom(offsetFrom(thumbRefs.current[openIndex]));
+    setOpenIndex(null);
   }
 
   function step(delta) {
@@ -124,15 +136,17 @@ export function ProjectGallery({ items }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openIndex]);
 
+  // The panel sizes itself from fullRect() on every render, so a resize
+  // only needs to trigger one.
+  const [, forceResize] = React.useReducer((n) => n + 1, 0);
   React.useEffect(() => {
-    function onResize() {
-      if (openIndex != null) setRect(fullRect());
-    }
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    if (openIndex == null) return;
+    window.addEventListener("resize", forceResize);
+    return () => window.removeEventListener("resize", forceResize);
   }, [openIndex]);
 
   const cur = openIndex != null ? items[openIndex] : null;
+  const panel = mounted && openIndex != null ? fullRect() : null;
 
   return (
     <>
@@ -140,7 +154,12 @@ export function ProjectGallery({ items }) {
         style={{
           listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 8, width: "100%",
           gridTemplateColumns: track, gridTemplateRows: "1fr", height: 560,
-          transition: "grid-template-columns 500ms var(--ease-standard)",
+          // The second and last place a layout property is animated (the
+          // FAQ accordion's height is the other). Widening the active
+          // strip IS the interaction here, and a transform-based version
+          // would scale the photos rather than reveal more of them. The
+          // track count is fixed, so this stays cheap.
+          transition: `grid-template-columns ${MS.ui}ms var(--ease-out)`,
         }}
         className="us-gallery-row"
       >
@@ -173,7 +192,7 @@ export function ProjectGallery({ items }) {
                 style={{
                   position: "absolute", inset: 0,
                   background: `linear-gradient(to top, rgba(4,47,52,0.90) 0%, rgba(4,47,52,${isActive ? 0.32 : 0.58}) 45%, transparent 78%)`,
-                  pointerEvents: "none", transition: "background 300ms var(--ease-standard)",
+                  pointerEvents: "none", transition: `background ${MS.ui}ms var(--ease-out)`,
                 }}
               />
               <div
@@ -181,7 +200,7 @@ export function ProjectGallery({ items }) {
                 style={{
                   position: "absolute", left: 22, bottom: 22, transformOrigin: "left bottom", transform: "rotate(-90deg)",
                   fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.82)",
-                  whiteSpace: "nowrap", opacity: isActive ? 0 : 1, transition: "opacity 250ms var(--ease-standard)", pointerEvents: "none",
+                  whiteSpace: "nowrap", opacity: isActive ? 0 : 1, transition: `opacity ${MS.hover}ms var(--ease-out)`, pointerEvents: "none",
                 }}
               >
                 {it.title}
@@ -190,7 +209,7 @@ export function ProjectGallery({ items }) {
                 style={{
                   position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 6, padding: 24,
                   opacity: isActive ? 1 : 0, transform: `translateY(${isActive ? 0 : 10}px)`,
-                  transition: `opacity 320ms var(--ease-standard) ${isActive ? "100ms" : ""}, transform 320ms var(--ease-standard) ${isActive ? "100ms" : ""}`,
+                  transition: `opacity ${MS.ui}ms var(--ease-out), transform ${MS.ui}ms var(--ease-out)`,
                   pointerEvents: isActive ? "auto" : "none",
                 }}
               >
@@ -214,29 +233,36 @@ export function ProjectGallery({ items }) {
         />
       </ul>
 
-      {mounted && openIndex != null && cur && createPortal(
+      {mounted && createPortal(
+        <AnimatePresence>
+        {openIndex != null && cur && panel && (
         <div
+          key="lightbox"
           role="dialog"
           aria-modal="true"
           aria-label={`${cur.title} photo`}
           style={{ position: "fixed", inset: 0, zIndex: 300 }}
         >
-          <div
+          <motion.div
             onClick={closeLightbox}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: T.ui }}
+            exit={{ opacity: 0, transition: T.exit }}
             style={{
               position: "absolute", inset: 0, background: "rgba(4,47,52,0.72)", backdropFilter: "blur(10px)",
-              opacity: controlsVisible ? 1 : 0, transition: "opacity 380ms var(--ease-standard)",
             }}
           />
-          <div
+          <motion.div
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
+            initial={{ opacity: 0, x: from.x, y: from.y, scale: from.scale }}
+            animate={{ opacity: 1, x: 0, y: 0, scale: 1, transition: SPRING_SOFT }}
+            exit={{ opacity: 0, x: from.x, y: from.y, scale: from.scale, transition: T.exit }}
             style={{
               position: "fixed",
-              left: rect?.left ?? 0, top: rect?.top ?? 0, width: rect?.width ?? 0, height: rect?.height ?? 0,
+              left: panel.left, top: panel.top, width: panel.width, height: panel.height,
               borderRadius: 20, overflow: "hidden", background: "var(--us-deep-teal)",
               boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55)",
-              transition: animate ? "left 480ms var(--ease-standard), top 480ms var(--ease-standard), width 480ms var(--ease-standard), height 480ms var(--ease-standard)" : "none",
             }}
           >
             {cur.hasImg ? (
@@ -246,51 +272,58 @@ export function ProjectGallery({ items }) {
                 <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>{cur.placeholder}</span>
               </div>
             )}
-            <div
-              style={{
-                position: "absolute", left: 0, right: 0, bottom: 0, height: "40%",
-                background: "linear-gradient(to top, rgba(4,47,52,0.82) 0%, transparent 100%)",
-                opacity: controlsVisible ? 1 : 0, transition: "opacity 300ms var(--ease-standard) 180ms",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute", left: 0, right: 0, top: 0, height: 96,
-                background: "linear-gradient(to bottom, rgba(4,47,52,0.55) 0%, transparent 100%)",
-                opacity: controlsVisible ? 1 : 0, transition: "opacity 300ms var(--ease-standard) 180ms",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute", left: 24, bottom: 20, right: 100, color: "var(--us-white)",
-                opacity: controlsVisible ? 1 : 0, transform: `translateY(${controlsVisible ? 0 : 8}px)`,
-                transition: "opacity 300ms var(--ease-standard) 220ms, transform 300ms var(--ease-standard) 220ms",
-              }}
+            {/* Scrims, caption and controls arrive once the panel has
+                travelled, so the photo lands first and the chrome settles
+                onto it. One group, one stagger — previously four
+                elements each carried their own hand-tuned delay. */}
+            <motion.div
+              variants={CHROME_GROUP}
+              initial="hidden"
+              animate="shown"
+              exit="hidden"
+              style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
             >
-              <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>{cur.title}</div>
-              {cur.desc && <div style={{ fontSize: 13, color: "rgba(255,255,255,0.82)", marginTop: 4, maxWidth: "42ch" }}>{cur.desc}</div>}
-            </div>
+              <motion.div
+                variants={CHROME_ITEM}
+                style={{
+                  position: "absolute", left: 0, right: 0, bottom: 0, height: "40%",
+                  background: "linear-gradient(to top, rgba(4,47,52,0.82) 0%, transparent 100%)",
+                }}
+              />
+              <motion.div
+                variants={CHROME_ITEM}
+                style={{
+                  position: "absolute", left: 0, right: 0, top: 0, height: 96,
+                  background: "linear-gradient(to bottom, rgba(4,47,52,0.55) 0%, transparent 100%)",
+                }}
+              />
+              <motion.div
+                variants={CHROME_ITEM}
+                style={{ position: "absolute", left: 24, bottom: 20, right: 100, color: "var(--us-white)" }}
+              >
+                <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>{cur.title}</div>
+                {cur.desc && <div style={{ fontSize: 13, color: "rgba(255,255,255,0.82)", marginTop: 4, maxWidth: "42ch" }}>{cur.desc}</div>}
+              </motion.div>
 
-            <div
-              style={{
-                position: "absolute", right: 20, bottom: 20, display: "flex", gap: 8,
-                opacity: controlsVisible ? 1 : 0, transition: "opacity 220ms var(--ease-standard) 260ms",
-              }}
-            >
-              <IconButton icon="chevron-left" label="Previous photo" variant="onDark" size="sm" onClick={() => step(-1)} />
-              <IconButton icon="chevron-right" label="Next photo" variant="onDark" size="sm" onClick={() => step(1)} />
-            </div>
+              <motion.div
+                variants={CHROME_ITEM}
+                style={{ position: "absolute", right: 20, bottom: 20, display: "flex", gap: 8, pointerEvents: "auto" }}
+              >
+                <IconButton icon="chevron-left" label="Previous photo" variant="onDark" size="sm" onClick={() => step(-1)} />
+                <IconButton icon="chevron-right" label="Next photo" variant="onDark" size="sm" onClick={() => step(1)} />
+              </motion.div>
 
-            <div
-              style={{
-                position: "absolute", top: 16, right: 16,
-                opacity: controlsVisible ? 1 : 0, transition: "opacity 220ms var(--ease-standard) 260ms",
-              }}
-            >
-              <IconButton icon="x" label="Close" variant="onDark" size="sm" onClick={closeLightbox} />
-            </div>
-          </div>
-        </div>,
+              <motion.div
+                variants={CHROME_ITEM}
+                style={{ position: "absolute", top: 16, right: 16, pointerEvents: "auto" }}
+              >
+                <IconButton icon="x" label="Close" variant="onDark" size="sm" onClick={closeLightbox} />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+        )}
+        </AnimatePresence>,
         document.body
       )}
     </>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/ui/Icon.jsx";
 import { ProjectGallery } from "@/components/sections/ProjectGallery.jsx";
+import { ParallaxImage } from "@/components/ui/ParallaxImage.jsx";
 import { PROJECTS, getProject, getProjectDetail, getGallery, PROJECT_DETAILS, PROJECT_GALLERIES } from "@/lib/data.js";
 
 export function generateStaticParams() {
@@ -38,7 +39,11 @@ export default function ProjectCaseStudyPage({ params }) {
   return (
     <div>
       <section data-screen-label="Case study hero" style={{ position: "relative", height: 620, overflow: "hidden" }}>
-        <img src={project.img} alt={project.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        {/* The one parallax on the site: a page-sized photo drifting
+            slightly slower than the page gives the header depth. Scroll
+            progress drives a transform only — the page itself scrolls
+            normally. */}
+        <ParallaxImage src={project.img} alt={project.name} style={{ position: "absolute", inset: 0 }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(4,47,52,0.94) 0%, rgba(4,47,52,0.4) 50%, rgba(4,47,52,0.15) 100%)", pointerEvents: "none" }} />
 
         <div className="us-container" style={{ position: "absolute", top: 0, left: 0, right: 0, paddingTop: "clamp(20px, 4vw, 28px)" }}>
@@ -51,7 +56,7 @@ export default function ProjectCaseStudyPage({ params }) {
               background: "var(--scrim-flat)", backdropFilter: "var(--blur-panel)", WebkitBackdropFilter: "var(--blur-panel)",
               border: "1px solid rgba(255,255,255,0.28)",
               fontFamily: "var(--font-core)", fontSize: 14, fontWeight: 600, color: "var(--us-white)",
-              transition: "background 200ms var(--ease-standard), transform 200ms var(--ease-standard)",
+              transition: "background var(--duration-hover) var(--ease-out)",
             }}
           >
             <Icon name="chevron-left" size={16} color="var(--us-white)" />
@@ -72,8 +77,11 @@ export default function ProjectCaseStudyPage({ params }) {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-        .us-back-btn:hover { background: rgba(4,47,52,0.8); transform: translateY(-2px); }
-        .us-back-btn:active { transform: translateY(0) scale(0.97); }
+        /* Position and scale come from the shared .us-row-hover /
+           --lift-button tokens so this chip presses like every other
+           control on the site. */
+        .us-back-btn:hover { background: rgba(4,47,52,0.8); transform: translateY(var(--lift-button)); }
+        .us-back-btn:active { transform: translateY(0) scale(var(--press-scale)); }
       `,
           }}
         />
