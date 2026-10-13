@@ -1,7 +1,6 @@
 import { Icon } from "@/components/ui/Icon.jsx";
-import { Badge } from "@/components/ui/Badge.jsx";
 import { Button } from "@/components/ui/Button.jsx";
-import { ACCREDITATIONS, BRANDS, CLIENTS, PARTNERS, DOWNLOADS } from "@/lib/data.js";
+import { BRANDS, CLIENTS, PARTNERS, DOWNLOADS } from "@/lib/data.js";
 
 export const metadata = {
   title: "Certifications & Partners — Accredited And Documented | Ultimate Solutions",
@@ -21,26 +20,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <section data-screen-label="Accreditations" style={{ paddingBlock: "clamp(44px, 7vw, 72px)" }} className="us-container">
-        <h2 style={{ margin: "0 0 48px", fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Accreditations</h2>
-        <div className="us-grid-2">
-          {ACCREDITATIONS.map((a) => (
-            <div key={a.name} className="us-accred-card" style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)", display: "flex", gap: 20, alignItems: "flex-start", transition: "transform var(--duration-hover) var(--ease-out), box-shadow var(--duration-hover) var(--ease-out)" }}>
-              <Icon name={a.icon} size={24} color="var(--us-deep-teal)" />
-              <div style={{ flex: 1 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-                  <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em" }}>{a.name}</h3>
-                  <Badge tone="mint">{a.status}</Badge>
-                </div>
-                <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--text-secondary)" }}>{a.body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <style>{`.us-accred-card:hover { transform: translateY(var(--lift-card)); box-shadow: var(--shadow-lg); }`}</style>
-      </section>
-
-      <section data-screen-label="Brands" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
+      <section data-screen-label="Brands" style={{ paddingBlock: "clamp(44px, 7vw, 72px)" }} className="us-container">
         <div className="us-split-brands">
           <div>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)", marginBottom: 20 }}>Collaborating For Greater Impact</div>
