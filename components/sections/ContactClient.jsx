@@ -4,14 +4,23 @@ import { motion } from "motion/react";
 import { Icon } from "../ui/Icon.jsx";
 import { Input } from "../ui/Input.jsx";
 import { Button } from "../ui/Button.jsx";
+import { SegmentedControl } from "../ui/SegmentedControl.jsx";
 import { COPY, CATS, CONTACT_ROWS } from "@/lib/data.js";
 import { PRESS_SCALE, SPRING, cssTransition } from "@/lib/motion.js";
 
 const PILL_ON = { bg: "var(--us-deep-teal)", fg: "var(--us-white)", bd: "var(--us-deep-teal)" };
 const PILL_OFF = { bg: "transparent", fg: "var(--text-secondary)", bd: "var(--border-subtle)" };
 
+// The CTA promises "tell us about the property and the stage it is at", so
+// the form asks exactly that, as one-tap choices. The property types reuse
+// the project types already shown on the Projects page.
+const PROPERTY_TYPES = ["Private residence", "Residential tower", "Development", "Other"];
+const PROJECT_STAGES = ["Concept design", "Under construction", "Existing home"];
+
+const fieldLabel = { fontSize: 14, fontWeight: 600, marginBottom: 12 };
+
 export function ContactClient() {
-  const [form, setForm] = React.useState({ name: "", email: "", detail: "" });
+  const [form, setForm] = React.useState({ name: "", email: "", detail: "", property: null, stage: null });
   const [interests, setInterests] = React.useState(["Lighting"]);
   const [touched, setTouched] = React.useState(false);
   const [sent, setSent] = React.useState(false);
@@ -36,6 +45,8 @@ export function ContactClient() {
     const body = [
       `Name: ${form.name || "-"}`,
       `Email: ${form.email}`,
+      `Property: ${form.property || "-"}`,
+      `Project stage: ${form.stage || "-"}`,
       `Disciplines of interest: ${interests.length ? interests.join(", ") : "-"}`,
       "",
       "About the project:",
@@ -47,7 +58,7 @@ export function ContactClient() {
 
   const resetForm = () => {
     setSent(false);
-    setForm({ name: "", email: "", detail: "" });
+    setForm({ name: "", email: "", detail: "", property: null, stage: null });
     setTouched(false);
   };
 
@@ -96,11 +107,21 @@ export function ContactClient() {
             <div>
               <h2 style={{ margin: "0 0 32px", fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em" }}>{COPY.formTitle}</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                <Input label="Name" placeholder="Full name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
-                <Input label="Email" type="email" placeholder="name@address.com" value={form.email} error={emailBad ? "Enter a valid address." : ""} onChange={(e) => { setForm((f) => ({ ...f, email: e.target.value })); setTouched(true); }} />
+                <div className="us-form-pair">
+                  <Input label="Name" placeholder="Full name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+                  <Input label="Email" type="email" placeholder="name@address.com" value={form.email} error={emailBad ? "Enter a valid address." : ""} onChange={(e) => { setForm((f) => ({ ...f, email: e.target.value })); setTouched(true); }} />
+                </div>
+                <div>
+                  <div id="us-field-property" style={fieldLabel}>Property</div>
+                  <SegmentedControl items={PROPERTY_TYPES} value={form.property} onChange={(v) => setForm((f) => ({ ...f, property: v }))} aria-labelledby="us-field-property" />
+                </div>
+                <div>
+                  <div id="us-field-stage" style={fieldLabel}>Project stage</div>
+                  <SegmentedControl items={PROJECT_STAGES} value={form.stage} onChange={(v) => setForm((f) => ({ ...f, stage: v }))} aria-labelledby="us-field-stage" />
+                </div>
                 <Input label={COPY.formField} placeholder={COPY.formPlaceholder} value={form.detail} onChange={(e) => setForm((f) => ({ ...f, detail: e.target.value }))} multiline resizable={false} rows={5} />
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 12 }}>Disciplines of interest</div>
+                  <div style={fieldLabel}>Disciplines of interest</div>
                   <motion.button
                     type="button"
                     onClick={toggleAll}
@@ -156,9 +177,6 @@ export function ContactClient() {
         </div>
       </div>
 
-      <div style={{ marginTop: 64, position: "relative", height: 320, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
-        <img src="/contact/dubai-skyline.jpg" alt="Dubai skyline at dusk" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-      </div>
     </section>
   );
 }

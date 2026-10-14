@@ -219,3 +219,7 @@
 .us-next-project:hover .us-next-go { background: var(--us-mint); border-color: var(--us-mint); color: var(--us-deep-teal); }
 .us-next-project:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -4px; }
 @media (max-width: 640px) { .us-next-go { width: 48px; height: 48px; } .us-case-cta { padding: 22px 20px; } }
+
+/* Contact form: name and email side by side, stacked on a phone. */
+.us-form-pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 640px) { .us-form-pair { grid-template-columns: minmax(0,1fr); gap: 20px; } }
