@@ -15,7 +15,6 @@
 
 .us-footer-grid { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr) 1fr 1fr; gap: 64px; }
 
-.us-timeline-row { display: grid; grid-template-columns: 160px 1fr 1.4fr; gap: 40px; }
 
 /* Header: desktop nav vs mobile menu toggle */
 .us-nav-desktop { display: flex; }
@@ -35,8 +34,6 @@
     gap: 40px;
   }
   .us-footer-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; }
-  .us-timeline-row { grid-template-columns: 96px 1fr; }
-  .us-timeline-row > *:nth-child(3) { grid-column: 1 / -1; }
 }
 
 @media (max-width: 640px) {
@@ -60,8 +57,6 @@
   .us-footer-bottom { margin-top: 40px !important; padding-top: 24px !important; }
 
   .us-container, .us-narrow { padding-left: 20px; padding-right: 20px; }
-  .us-timeline-row { grid-template-columns: minmax(0,1fr); gap: 8px; }
-  .us-timeline-row > *:nth-child(3) { grid-column: auto; }
 
   /* Hero stat row: plain flex-wrap breaks 2-then-1 on a 390px screen
      depending on label width. Force one even 3-column row instead, with
@@ -231,4 +226,27 @@
 @media (max-width: 980px) {
   .us-book-bar-wrap { display: block; position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 45; pointer-events: none; }
   .us-book-bar { pointer-events: auto; padding: 8px; border-radius: 999px; background: rgba(4,47,52,0.88); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 12px 32px rgba(4,47,52,0.28); }
+}
+
+/* About timeline (components/sections/Timeline.jsx). The current milestone
+   is in full focus; the others sit back at 0.5 opacity -- still readable,
+   just quieter. */
+.us-tl { display: grid; grid-template-columns: minmax(0,0.8fr) minmax(0,1.5fr); gap: 64px; align-items: start; }
+.us-tl-year { position: sticky; top: 124px; }
+.us-tl-year-big { font-size: clamp(72px, 8.5vw, 124px); font-weight: 200; letter-spacing: -0.06em; line-height: 0.9; color: var(--us-deep-teal); font-variant-numeric: tabular-nums; }
+.us-tl-year-rest { margin-top: 12px; font-size: 24px; font-weight: 300; letter-spacing: -0.02em; color: var(--us-slate); font-variant-numeric: tabular-nums; }
+.us-tl-rail { list-style: none; margin: 0; padding: 0 0 0 32px; border-left: 1px solid var(--border-strong); }
+.us-tl-item { position: relative; padding-bottom: 44px; opacity: 0.5; transition: opacity var(--duration-ui) var(--ease-out); }
+.us-tl-item:last-child { padding-bottom: 0; }
+.us-tl-item::before { content: ""; position: absolute; left: -38px; top: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--us-pale-blue-gray-deep); transition: background var(--duration-ui) var(--ease-out), box-shadow var(--duration-ui) var(--ease-out); }
+.us-tl-item.is-active { opacity: 1; }
+.us-tl-item.is-active::before { background: var(--us-deep-teal); box-shadow: 0 0 0 5px var(--us-mint-wash); }
+.us-tl-when { margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: var(--us-slate); font-variant-numeric: tabular-nums; }
+@media (max-width: 980px) {
+  .us-tl { grid-template-columns: minmax(0,1fr); gap: 0; }
+  .us-tl-year { display: none; }
+  .us-tl-rail { padding-left: 24px; }
+  .us-tl-item { opacity: 1; padding-bottom: 32px; }
+  .us-tl-item::before { left: -30px; }
+  .us-tl-when { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--us-deep-teal); }
 }

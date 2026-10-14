@@ -2,6 +2,7 @@ import { Icon } from "@/components/ui/Icon.jsx";
 import { Badge } from "@/components/ui/Badge.jsx";
 import { StatCard } from "@/components/ui/StatCard.jsx";
 import { FaqAccordion } from "@/components/ui/FaqAccordion.jsx";
+import { Timeline } from "@/components/sections/Timeline.jsx";
 import { TIMELINE, AWARDS, PRESS, ABOUT_FAQS } from "@/lib/data.js";
 
 export const metadata = {
@@ -25,9 +26,14 @@ export default function AboutPage() {
       </section>
 
       <section data-screen-label="About intro" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
-        <div style={{ position: "relative", height: 480, borderRadius: 28, overflow: "hidden", border: "1px solid var(--border-subtle)" }}>
-          <img src="/about/team-on-site.png" alt="The Ultimate Solutions team on site" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-        </div>
+        {/* Opens on finished work. The team-on-site photo still appears,
+            further down, once the story has been told. */}
+        <figure style={{ margin: 0 }}>
+          <div style={{ position: "relative", height: 480, borderRadius: 6, overflow: "hidden" }}>
+            <img src="/projects/volante-2/living-room.png" alt="A Volante 2 living room" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 62%" }} />
+          </div>
+          <figcaption style={{ marginTop: 12, fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>Volante 2 · Business Bay</figcaption>
+        </figure>
         <div className="us-grid-2" style={{ marginTop: 80 }}>
           <div>
             <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Where It Began</h2>
@@ -54,6 +60,12 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
+        <figure style={{ margin: "72px 0 0" }}>
+          <div style={{ position: "relative", height: 380, borderRadius: 6, overflow: "hidden" }}>
+            <img src="/about/team-on-site.png" alt="The Ultimate Solutions team on site" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          </div>
+          <figcaption style={{ marginTop: 12, fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>The team on site</figcaption>
+        </figure>
       </section>
 
       <section data-screen-label="Timeline" style={{ background: "var(--surface-subtle)", paddingBlock: "clamp(56px, 9vw, 96px)" }}>
@@ -62,15 +74,7 @@ export default function AboutPage() {
           <p style={{ margin: "0 0 64px", fontSize: 18, color: "var(--text-secondary)", maxWidth: "75ch" }}>
             For more than two decades, Ultimate Solutions has grown and evolved alongside Dubai. From the early days of luxury residential development and emerging smart-home technology to today's sophisticated, connected and intelligent living environments, our founding principle has remained the same: technology should adapt to the individual, remain effortless to use, and enhance the experience of the space rather than compete with it.
           </p>
-          <div style={{ borderTop: "1px solid var(--border-strong)" }}>
-            {TIMELINE.map((t) => (
-              <div key={t.year} className="us-timeline-row us-row-hover us-row-hover-on-dark" style={{ paddingBlock: "32px", borderBottom: "1px solid var(--border-strong)", alignItems: "start" }}>
-                <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.02em", color: "var(--us-deep-teal)" }}>{t.year}</div>
-                <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.25 }}>{t.title}</h3>
-                <p style={{ margin: 0, fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.55, whiteSpace: "pre-line" }}>{t.body}</p>
-              </div>
-            ))}
-          </div>
+          <Timeline items={TIMELINE} />
         </div>
       </section>
 
