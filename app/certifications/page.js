@@ -1,5 +1,6 @@
 import { Icon } from "@/components/ui/Icon.jsx";
 import { Button } from "@/components/ui/Button.jsx";
+import { LogoWall } from "@/components/ui/LogoWall.jsx";
 import { BRANDS, CLIENTS, PARTNERS, DOWNLOADS } from "@/lib/data.js";
 
 export const metadata = {
@@ -29,17 +30,7 @@ export default function CertificationsPage() {
               Our partnerships with leading brands and industry players enable us to bring added value to our clients. By working with well-known brands, we ensure our solutions are of the highest quality and supported by trusted names in the industry.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(170px,1fr))", gap: 12 }}>
-            {BRANDS.map((b) => (
-              <div key={b.name} style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 104, padding: "20px 14px", border: `1px solid ${b.bd}`, borderRadius: 12, background: b.bg, fontSize: 14, fontWeight: 800, letterSpacing: "-0.01em", color: b.dark ? "var(--us-white)" : "var(--us-deep-teal)" }}>
-                {b.hasLogo ? (
-                  <img src={b.logo} alt={b.name} style={{ width: "100%", maxHeight: 56, objectFit: "contain" }} />
-                ) : (
-                  <span title="Logo pending — known handoff gap">{b.name}</span>
-                )}
-              </div>
-            ))}
-          </div>
+          <LogoWall items={BRANDS} label="Brands we work with" />
         </div>
       </section>
 
@@ -52,13 +43,7 @@ export default function CertificationsPage() {
               We take pride in working with clients from various sectors, including residential, commercial, and institutional. Our client-centric approach has fostered long-term partnerships and allowed us to build a reputation for trust and reliability.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(170px,1fr))", gap: 12 }}>
-            {CLIENTS.map((c) => (
-              <div key={c.name} style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 104, padding: "20px 14px", border: "1px solid var(--border-subtle)", borderRadius: 12, background: "var(--us-white)" }}>
-                <img src={c.logo} alt={c.name} style={{ width: "100%", maxHeight: 60, objectFit: "contain" }} />
-              </div>
-            ))}
-          </div>
+          <LogoWall items={CLIENTS} label="Our clients" />
         </div>
       </section>
 

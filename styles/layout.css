@@ -152,3 +152,20 @@
     padding-right: 20px;
   }
 }
+
+/* Logo walls (brands, clients): see components/ui/LogoWall.jsx for why each
+   filter is there. 6 columns divides both lists (24 brands, 18 clients)
+   evenly, as does 3 on a phone, so no row is ever left half empty. */
+.us-logo-wall { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); border-top: 1px solid var(--border-subtle); border-left: 1px solid var(--border-subtle); }
+.us-logo-wall > div { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 96px; padding: 18px 14px; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+.us-logo-wall img { max-width: 100%; max-height: 38px; object-fit: contain; filter: grayscale(1) contrast(1.35); mix-blend-mode: multiply; opacity: 0.72; transition: filter var(--duration-hover) var(--ease-out), opacity var(--duration-hover) var(--ease-out); }
+.us-logo-wall img.us-logo-inv { filter: invert(1) grayscale(1) contrast(1.35); }
+.us-logo-wall > div:hover img { filter: none; opacity: 1; }
+.us-logo-wall > div:hover img.us-logo-inv { filter: invert(1); }
+.us-logo-word { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--us-slate); }
+@media (max-width: 640px) {
+  .us-logo-wall { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .us-logo-wall > div { min-height: 72px; padding: 12px 8px; }
+  .us-logo-wall img { max-height: 24px; }
+  .us-logo-word { font-size: 11px; }
+}
