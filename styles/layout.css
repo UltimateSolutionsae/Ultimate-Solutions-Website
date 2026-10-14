@@ -169,3 +169,19 @@
   .us-logo-wall img { max-height: 24px; }
   .us-logo-word { font-size: 11px; }
 }
+
+/* Discipline tiles (components/sections/Categories.jsx). At rest the
+   caption is pushed down by the description's measured height, so only
+   the label and title show; hover or keyboard focus slides it up and fades
+   the description in -- transform and opacity only. */
+.us-tile-cap { transform: translateY(var(--desc-h, 0px)); transition: transform var(--duration-ui) var(--ease-out); }
+.us-tile-desc { opacity: 0; transition: opacity var(--duration-ui) var(--ease-out); }
+.us-tile:hover .us-tile-cap, .us-tile:focus-within .us-tile-cap { transform: none; }
+.us-tile:hover .us-tile-desc, .us-tile:focus-within .us-tile-desc { opacity: 1; }
+.us-tile-link { position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.us-tile-link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -4px; }
+/* No hover on touch screens: always show the description there. */
+@media (hover: none) {
+  .us-tile-cap { transform: none; }
+  .us-tile-desc { opacity: 1; }
+}

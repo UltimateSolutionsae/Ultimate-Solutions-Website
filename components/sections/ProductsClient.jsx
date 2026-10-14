@@ -6,18 +6,9 @@ import { Tabs } from "../ui/Tabs.jsx";
 import { Icon } from "../ui/Icon.jsx";
 import { Button } from "../ui/Button.jsx";
 import { FaqAccordion } from "../ui/FaqAccordion.jsx";
-import { COPY, CATS, getCategory } from "@/lib/data.js";
+import { COPY, CATS, getCategory, DISCIPLINE_PHOTOS } from "@/lib/data.js";
 import { T } from "@/lib/motion.js";
 
-// Same photos used for the home page's "Six Disciplines" tiles.
-const CATEGORY_HERO = {
-  control: "/disciplines/control.jpg",
-  entertainment: "/disciplines/entertainment.jpg",
-  security: "/disciplines/security.jpg",
-  communications: "/disciplines/communications.png",
-  lighting: "/lighting-ceiling.jpg",
-  connectivity: "/disciplines/connectivity.png",
-};
 
 export function ProductsClient() {
   const router = useRouter();
@@ -32,7 +23,9 @@ export function ProductsClient() {
   }, [searchParams]);
 
   const cat = getCategory(category);
-  const heroSrc = CATEGORY_HERO[cat.id] || null;
+  // Same photo as the discipline's homepage tile.
+  const photo = DISCIPLINE_PHOTOS[cat.id];
+  const heroSrc = photo ? photo.src : null;
 
   const onChange = (v) => {
     setCategory(v);
@@ -78,7 +71,7 @@ export function ProductsClient() {
 
             <div style={{ position: "relative", height: 400, borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-subtle)", margin: "48px 0", minWidth: 0 }}>
               {heroSrc ? (
-                <img src={heroSrc} alt={cat.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src={heroSrc} alt={cat.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: photo.position || "50% 50%" }} />
               ) : (
                 <div style={{ width: "100%", height: "100%", background: "var(--us-pale-blue-gray-deep)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
                   <span style={{ fontSize: 13, color: "var(--text-secondary)", textAlign: "center" }}>Category photograph — cool, architectural, evening light</span>
