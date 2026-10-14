@@ -3,6 +3,7 @@ import { MotionConfig } from "motion/react";
 import { Header } from "@/components/chrome/Header.jsx";
 import { Footer } from "@/components/chrome/Footer.jsx";
 import { ScrollToTop } from "@/components/chrome/ScrollToTop.jsx";
+import { MobileBookBar } from "@/components/chrome/MobileBookBar.jsx";
 import { SPRING } from "@/lib/motion.js";
 
 export const metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
             <main style={{ flex: 1 }}>{children}</main>
             <Footer />
           </div>
+          <MobileBookBar />
         </MotionConfig>
       </body>
     </html>

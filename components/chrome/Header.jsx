@@ -26,6 +26,8 @@ export function Header() {
   React.useEffect(() => {
     if (!menuOpen) return;
     document.body.style.overflow = "hidden";
+    // Read by MobileBookBar, which hides while the menu is open.
+    document.documentElement.dataset.menu = "open";
     const onKey = (e) => { if (e.key === "Escape") setMenuOpen(false); };
     const mq = window.matchMedia("(min-width: 981px)");
     const onChange = (e) => { if (e.matches) setMenuOpen(false); };
@@ -33,6 +35,7 @@ export function Header() {
     mq.addEventListener("change", onChange);
     return () => {
       document.body.style.overflow = "";
+      delete document.documentElement.dataset.menu;
       window.removeEventListener("keydown", onKey);
       mq.removeEventListener("change", onChange);
     };
