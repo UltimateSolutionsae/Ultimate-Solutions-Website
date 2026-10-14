@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { Icon } from "@/components/ui/Icon.jsx";
 import { ProjectGallery } from "@/components/sections/ProjectGallery.jsx";
 import { ParallaxImage } from "@/components/ui/ParallaxImage.jsx";
-import { PROJECTS, getProject, getProjectDetail, getGallery, PROJECT_DETAILS, PROJECT_GALLERIES } from "@/lib/data.js";
+import { Button } from "@/components/ui/Button.jsx";
+import { PROJECTS, COPY, getProject, getProjectDetail, getGallery, PROJECT_DETAILS, PROJECT_GALLERIES } from "@/lib/data.js";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -27,14 +28,25 @@ export default function ProjectCaseStudyPage({ params }) {
   const isKnownDetail = !!PROJECT_DETAILS[project.id];
   const hasRealGallery = !!PROJECT_GALLERIES[project.id];
 
+  // Placeholder values ("On request", "Delivered") read as unfinished when
+  // shown as facts, so they are left out rather than displayed.
+  const isPlaceholder = (v) => /^(on request|details on request|delivered)$/i.test(String(v).trim());
   const facts = [
     { k: "Location", v: project.year },
     { k: "Type", v: project.type },
     { k: "Control", v: isKnownDetail ? "Full KNX" : "All six" },
     { k: "Units", v: isKnownDetail ? "5,000 & 10,000 sqft" : "On request" },
     { k: "Systems", v: project.cats },
-  ];
-  const specs = [{ k: "Type", v: project.type }, { k: "Location", v: project.year }, ...detail.specs];
+  ].filter((f) => !isPlaceholder(f.v));
+  // Type and Location already lead the facts bar, so the summary card only
+  // earns its place when the project has real specifications of its own.
+  const specs = detail.specs.filter((s) => !isPlaceholder(s.v));
+  const showSummary = specs.length > 0;
+
+  // The next project in the list, wrapping round, so every case study
+  // leads somewhere instead of ending on the footer.
+  const idx = PROJECTS.findIndex((p) => p.id === project.id);
+  const next = PROJECTS[(idx + 1) % PROJECTS.length];
 
   return (
     <div>
@@ -88,7 +100,7 @@ export default function ProjectCaseStudyPage({ params }) {
       </section>
 
       <section data-screen-label="Case study facts" style={{ borderBottom: "1px solid var(--border-subtle)" }}>
-        <div className="us-container us-grid-5" style={{ paddingBlock: "48px" }}>
+        <div className="us-container" style={{ paddingBlock: "48px", display: "flex", flexWrap: "wrap", gap: "28px 72px" }}>
           {facts.map((f) => (
             <div key={f.k}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>{f.k}</div>
@@ -99,8 +111,8 @@ export default function ProjectCaseStudyPage({ params }) {
       </section>
 
       <section data-screen-label="Case study body" style={{ paddingBlock: "clamp(44px, 7vw, 72px) clamp(36px, 5vw, 52px)" }} className="us-container">
-        <div className="us-split-16-1">
-          <div style={{ minWidth: 0 }}>
+        <div className={showSummary ? "us-split-16-1" : undefined}>
+          <div style={{ minWidth: 0, maxWidth: showSummary ? undefined : 760 }}>
             <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Scope Delivered</h2>
             <div className="us-grid-2" style={{ marginTop: 24 }}>
               {detail.delivers.map((d) => (
@@ -118,6 +130,7 @@ export default function ProjectCaseStudyPage({ params }) {
             <p style={{ margin: "16px 0 0", fontSize: 16, color: "var(--text-secondary)" }}>{detail.secondBody}</p>
           </div>
 
+          {showSummary && (
           <aside style={{ position: "sticky", top: 108, display: "flex", flexDirection: "column", gap: 24 }}>
             <div style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: 20, padding: 32, boxShadow: "var(--shadow-sm)" }}>
               <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>Project Summary</div>
@@ -131,10 +144,11 @@ export default function ProjectCaseStudyPage({ params }) {
               </div>
             </div>
           </aside>
+          )}
         </div>
       </section>
 
-      <section data-screen-label="Case study gallery" style={{ paddingBlock: "0 clamp(56px, 9vw, 96px)" }} className="us-container">
+      <section data-screen-label="Case study gallery" style={{ paddingBlock: "0 clamp(40px, 6vw, 64px)" }} className="us-container">
         <ProjectGallery items={gallery} />
         {!hasRealGallery && (
           <p style={{ marginTop: 16, fontSize: 13, color: "var(--text-secondary)" }}>
@@ -142,6 +156,27 @@ export default function ProjectCaseStudyPage({ params }) {
           </p>
         )}
       </section>
+
+      <section data-screen-label="Case study booking" className="us-container" style={{ paddingBottom: "clamp(40px, 6vw, 64px)" }}>
+        <div className="us-case-cta">
+          <p style={{ margin: 0, fontSize: 18, fontWeight: 600, letterSpacing: "-0.01em", maxWidth: "52ch" }}>{COPY.ctaBandLead}</p>
+          <Button variant="primary" size="md" icon="arrow-right" href="/contact">{COPY.cta}</Button>
+        </div>
+      </section>
+
+      <Link href={`/projects/${next.id}`} className="us-bare us-next-project" data-screen-label="Next project">
+        <img src={next.img} alt="" />
+        <span className="us-container us-next-inner">
+          <span>
+            <span style={{ display: "block", fontSize: 12, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--us-mint)" }}>Next Project</span>
+            <span style={{ display: "block", marginTop: 12, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02 }}>{next.name}</span>
+            <span style={{ display: "block", marginTop: 10, fontSize: 15, color: "rgba(255,255,255,0.78)" }}>{next.type} · {next.year}</span>
+          </span>
+          <span className="us-next-go" aria-hidden="true">
+            <Icon name="arrow-right" size={22} />
+          </span>
+        </span>
+      </Link>
     </div>
   );
 }
