@@ -277,3 +277,26 @@
   .us-day-card { margin-top: 36px; }
   .us-day-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 6px; margin-bottom: 16px; }
 }
+
+/* Project rows (components/sections/ProjectRow.jsx): image and details
+   side by side, alternating sides row to row. */
+.us-prow-list { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 72px); }
+.us-prow { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: clamp(28px, 4vw, 56px); align-items: center; color: var(--text-primary); }
+/* The global a:hover recolours link text; a row keeps its own colours. */
+.us-prow:hover { color: var(--text-primary); }
+.us-prow.is-rev { grid-template-columns: minmax(0,1fr) minmax(0,1.25fr); }
+.us-prow.is-rev .us-prow-ph { order: 2; }
+.us-prow-ph { height: clamp(260px, 30vw, 420px); border-radius: 6px; background: var(--surface-subtle); }
+.us-prow-ph img { width: 100%; height: 100%; object-fit: cover; }
+.us-prow-meta { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary); }
+.us-prow-name { margin: 14px 0 0; font-size: var(--text-h2); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; }
+.us-prow-sum { margin: 14px 0 0; font-size: 16px; line-height: 1.6; color: var(--text-secondary); max-width: 46ch; }
+.us-prow-go { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-size: 14px; font-weight: 700; color: var(--us-deep-teal); }
+.us-prow-arrow { display: inline-block; transition: transform var(--duration-hover) var(--ease-out); }
+.us-prow:hover .us-prow-arrow, .us-prow:focus-visible .us-prow-arrow { transform: translateX(4px); }
+.us-prow:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 8px; border-radius: 8px; }
+@media (max-width: 760px) {
+  .us-prow, .us-prow.is-rev { grid-template-columns: minmax(0,1fr); gap: 20px; }
+  .us-prow.is-rev .us-prow-ph { order: 0; }
+  .us-prow-ph { height: 260px; }
+}
