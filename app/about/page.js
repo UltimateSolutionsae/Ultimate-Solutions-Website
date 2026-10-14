@@ -26,15 +26,7 @@ export default function AboutPage() {
       </section>
 
       <section data-screen-label="About intro" style={{ paddingBlock: "0 clamp(44px, 7vw, 72px)" }} className="us-container">
-        {/* Opens on finished work. The team-on-site photo still appears,
-            further down, once the story has been told. */}
-        <figure style={{ margin: 0 }}>
-          <div style={{ position: "relative", height: 480, borderRadius: 6, overflow: "hidden" }}>
-            <img src="/projects/volante-2/living-room.png" alt="A Volante 2 living room" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 62%" }} />
-          </div>
-          <figcaption style={{ marginTop: 12, fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-secondary)" }}>Volante 2 · Business Bay</figcaption>
-        </figure>
-        <div className="us-grid-2" style={{ marginTop: 80 }}>
+        <div className="us-grid-2" style={{ marginTop: 24 }}>
           <div>
             <h2 style={{ margin: 0, fontSize: "var(--text-h2)", fontWeight: 800, letterSpacing: "-0.02em" }}>Where It Began</h2>
             <p style={{ margin: "16px 0 0", fontSize: 16, color: "var(--text-secondary)" }}>
