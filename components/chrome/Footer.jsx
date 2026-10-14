@@ -7,7 +7,7 @@ import { CATS, CONTACT_ROWS, SOCIAL_LINKS } from "@/lib/data.js";
 const COMPANY_LINKS = [
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
-  { label: "Certifications", href: "/certifications" },
+  { label: "Our Brands", href: "/brands" },
   { label: "Contact", href: "/contact" },
 ];
 

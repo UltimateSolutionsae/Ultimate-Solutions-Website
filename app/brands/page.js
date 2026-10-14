@@ -3,20 +3,17 @@ import { BrandWall } from "@/components/sections/BrandWall.jsx";
 import { CLIENTS } from "@/lib/data.js";
 
 export const metadata = {
-  title: "Certifications & Partners — Accredited And Documented | Ultimate Solutions",
-  description: "Certification, licensing and manufacturer accreditations for Ultimate Solutions.",
+  title: "Our Brands | Ultimate Solutions",
+  description: "The brands and clients Ultimate Solutions works with."
 };
 
-export default function CertificationsPage() {
+export default function BrandsPage() {
   return (
     <div>
-      <section data-screen-label="Certs header" style={{ background: "linear-gradient(135deg,#042F34 0%,#16232B 100%)", color: "var(--us-white)", position: "relative", overflow: "hidden" }}>
+      <section data-screen-label="Brands header" style={{ background: "linear-gradient(135deg,#042F34 0%,#16232B 100%)", color: "var(--us-white)", position: "relative", overflow: "hidden" }}>
         <div className="us-container" style={{ position: "relative", paddingBlock: "clamp(44px, 7vw, 72px)" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 24 }}>Certifications And Partners</div>
-          <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "22ch" }}>Accredited And Documented</h1>
-          <p style={{ margin: "24px 0 0", fontSize: 18, color: "rgba(255,255,255,0.78)", maxWidth: "56ch" }}>
-            Certification, licensing and manufacturer accreditations.
-          </p>
+          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--us-mint)", marginBottom: 24 }}>Our Brands</div>
+          <h1 style={{ margin: 0, fontSize: "var(--text-display)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.02, maxWidth: "22ch" }}>The Brands And Clients We Work With</h1>
         </div>
       </section>
 
