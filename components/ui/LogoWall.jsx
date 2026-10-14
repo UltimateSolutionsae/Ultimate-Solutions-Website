@@ -14,11 +14,15 @@ import React from "react";
  * file reads as a deliberate style rather than a broken tile. Hyphens become
  * non-breaking (U+2011) so names like "Crestron DMC-E" never split at the dash.
  */
-export function LogoWall({ items, label }) {
+export function LogoWall({ items, label, active = "all" }) {
+  // With a category active, matching items are "on" (full colour) and the
+  // rest "off" (faded back); see the .is-filtered rules in layout.css.
+  const filtered = active !== "all";
+  const state = (it) => (!filtered ? undefined : it.cat === active ? "is-on" : "is-off");
   return (
-    <div className="us-logo-wall" role="list" aria-label={label}>
+    <div className={"us-logo-wall" + (filtered ? " is-filtered" : "")} role="list" aria-label={label}>
       {items.map((it) => (
-        <div key={it.name} role="listitem">
+        <div key={it.name} role="listitem" className={state(it)}>
           {it.logo ? (
             <img src={it.logo} alt={it.name} loading="lazy" className={it.dark ? "us-logo-inv" : undefined} />
           ) : (

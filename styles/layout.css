@@ -150,6 +150,17 @@
 .us-logo-wall > div:hover img { filter: none; opacity: 1; }
 .us-logo-wall > div:hover img.us-logo-inv { filter: invert(1); }
 .us-logo-word { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--us-slate); }
+/* Category filter (components/sections/BrandWall.jsx): the chosen
+   category comes into full colour, everything else fades well back. Many
+   logos are already near-black, so the fade does most of the work. */
+.us-logo-word { transition: opacity var(--duration-ui) var(--ease-out), color var(--duration-ui) var(--ease-out); }
+.us-logo-wall img { transition: filter var(--duration-ui) var(--ease-out), opacity var(--duration-ui) var(--ease-out); }
+.us-logo-wall.is-filtered > div.is-on img { filter: none; opacity: 1; }
+.us-logo-wall.is-filtered > div.is-on img.us-logo-inv { filter: invert(1); }
+.us-logo-wall.is-filtered > div.is-on .us-logo-word { color: var(--us-deep-teal); }
+.us-logo-wall.is-filtered > div.is-off img,
+.us-logo-wall.is-filtered > div.is-off .us-logo-word { opacity: 0.18; }
+.us-logo-wall.is-filtered > div.is-off:hover img { opacity: 0.6; }
 @media (max-width: 640px) {
   .us-logo-wall { grid-template-columns: repeat(3, minmax(0,1fr)); }
   .us-logo-wall > div { min-height: 72px; padding: 12px 8px; }
@@ -323,3 +334,6 @@
   .us-testi-who { flex-basis: 100%; }
   .us-testi-avatar { width: 42px; height: 42px; margin-left: -4px; }
 }
+
+/* Visually hidden, still announced by screen readers. */
+.us-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
