@@ -5,7 +5,6 @@ import { Process } from "@/components/sections/Process.jsx";
 import { DepthBand } from "@/components/sections/DepthBand.jsx";
 import { SelectedProjects } from "@/components/sections/SelectedProjects.jsx";
 import { Mission } from "@/components/sections/Mission.jsx";
-import { DayInTheHome } from "@/components/sections/DayInTheHome.jsx";
 import { Testimonial } from "@/components/sections/Testimonial.jsx";
 import { HomeCta } from "@/components/sections/HomeCta.jsx";
 
@@ -18,7 +17,6 @@ export default function HomePage() {
       <Process />
       <DepthBand />
       <SelectedProjects />
-      <DayInTheHome />
       <Mission />
       <Testimonial />
       <HomeCta />
