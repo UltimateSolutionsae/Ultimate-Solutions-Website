@@ -13,7 +13,7 @@ export function HomeCta() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
           <Button variant="primary" size="lg" icon="arrow-right" fullWidth href="/contact">{COPY.ctaBandBtn}</Button>
-          <Button variant="outlineOnSurface" size="lg" icon="file-text" fullWidth href="/brands">Documentation And Downloads</Button>
+          <Button variant="outlineOnSurface" size="lg" icon="file-text" fullWidth href="/brands">Brands and Clients</Button>
           <div style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>We reply within one working day.</div>
         </div>
       </Reveal>
