@@ -1,0 +1,8 @@
+# Apache settings for IONOS hosting of the static export.
+
+# The Certifications page became "Our Brands"; keep old links and search
+# results working.
+RedirectMatch 301 ^/certifications/?$ /brands/
+
+# Show the site's own 404 page for missing URLs.
+ErrorDocument 404 /404.html
